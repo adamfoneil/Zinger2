@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Diagnostics;
+using Zinger2.Service.Internal;
 using Zinger2.Service.Models;
 
 namespace Zinger2.Service.Abstract
@@ -65,11 +66,14 @@ namespace Zinger2.Service.Abstract
             sw.Stop();
 
             List<string> resultClasses = new();
+            int nameIndex = 0;
             using var reader = cmd.ExecuteReader(CommandBehavior.SchemaOnly);
             do
             {
+                var resultClassName = GetResultClassName(nameIndex);
                 var table = reader.GetSchemaTable();
-                if (table is not null) resultClasses.Add(BuildResultClass(table));
+                if (table is not null) resultClasses.Add(CSharpClassBuilder.FromSchemaTable(resultClassName, table));
+                nameIndex++;
             } while (reader.NextResult());
 
             return new ExecuteResult()
@@ -78,11 +82,18 @@ namespace Zinger2.Service.Abstract
                 DataSet = dataSet,
                 ResultClasses = resultClasses
             };
-        }
 
-        private string BuildResultClass(DataTable table)
-        {
-            throw new NotImplementedException();
+            string GetResultClassName(int nameIndex)
+            {
+                try
+                {
+                    return query.ResultClassNames[nameIndex];
+                }
+                catch
+                {
+                    return $"Result{(nameIndex + 1)}";
+                }
+            }
         }
 
         protected Dictionary<int, string> EnumToDictionary<TEnum>() where TEnum : struct, Enum

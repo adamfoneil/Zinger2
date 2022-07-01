@@ -4,7 +4,7 @@ namespace Zinger2.Service.Models
 {
     public class Query
     {
-        public string? ClassName { get; set; }
+        public List<string> ResultClassNames { get; set; } = new();
         public CommandType CommandType { get; set; }
         public string? Sql { get; set; }
         public List<Parameter> Parameters { get; set; } = new();
