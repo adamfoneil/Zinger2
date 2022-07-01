@@ -64,20 +64,25 @@ namespace Zinger2.Service.Abstract
             await Task.Run(() => adapter.Fill(dataSet));
             sw.Stop();
 
-            List<DataTable> schemaTables = new();
+            List<string> resultClasses = new();
             using var reader = cmd.ExecuteReader(CommandBehavior.SchemaOnly);
             do
             {
                 var table = reader.GetSchemaTable();
-                if (table is not null) schemaTables.Add(table);
+                if (table is not null) resultClasses.Add(BuildResultClass(table));
             } while (reader.NextResult());
 
             return new ExecuteResult()
             {
                 Elapsed = sw.Elapsed,
                 DataSet = dataSet,
-                SchemaTables = schemaTables
+                ResultClasses = resultClasses
             };
+        }
+
+        private string BuildResultClass(DataTable table)
+        {
+            throw new NotImplementedException();
         }
 
         protected Dictionary<int, string> EnumToDictionary<TEnum>() where TEnum : struct, Enum
@@ -95,7 +100,7 @@ namespace Zinger2.Service.Abstract
         {
             public TimeSpan Elapsed { get; init; }
             public DataSet DataSet { get; init; } = new();
-            public List<DataTable> SchemaTables { get; init; } = new();
+            public List<string> ResultClasses { get; init; } = new();
         }
     }
 }
