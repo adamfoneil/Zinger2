@@ -13,5 +13,17 @@
         public string? Name { get; set; }
         public ConnectionType Type { get; set; }
         public string? ConnectionString { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Connection connection)
+            {
+                return GetHashCode().Equals(connection.GetHashCode());               
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode() => (Name?.ToLower() + Type.ToString() + ConnectionString?.ToLower()).GetHashCode();
     }
 }
