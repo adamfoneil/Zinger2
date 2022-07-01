@@ -21,5 +21,13 @@ namespace Zinger2.Service
         protected override IDbCommand GetCommand(IDbConnection connection, Query query) => new SqlCommand(query.Sql, connection as SqlConnection);
 
         protected override IDbConnection GetConnection() => new SqlConnection(_connectionString);
+
+        protected override void SetParamProperties(IDbDataParameter dbParam, Query.Parameter queryParam)
+        {
+            if (dbParam is SqlParameter sqlParam)
+            {
+                sqlParam.SqlDbType = (SqlDbType)queryParam.Type;
+            }
+        }
     }
 }

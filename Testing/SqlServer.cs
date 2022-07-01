@@ -32,14 +32,17 @@ namespace Testing
                 Sql = "SELECT * FROM [sys].[tables] WHERE [name] LIKE CONCAT('%', @name, '%')",
                 Parameters = new Query.Parameter[]
                 {
-                    new Query.Parameter() 
-                    { 
-                        Name = "name", 
-                        Type = (int)SqlDbType.NVarChar, 
-                        Value = "e" 
+                    new Query.Parameter()
+                    {
+                        Name = "name",
+                        Type = (int)SqlDbType.NVarChar,
+                        Value = "de"
                     }
                 }.ToList()
             });
+
+            Assert.IsTrue(result.DataSet.Tables[0].Rows.Count == 1);
+            Assert.IsTrue(result.DataSet.Tables[0].AsEnumerable().All(row => (row.Field<string>("name") ?? string.Empty).Contains("e")));
         }
     }
 }

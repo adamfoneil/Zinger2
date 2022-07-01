@@ -16,6 +16,13 @@ namespace Zinger2.Service.Abstract
         /// </summary>
         public abstract Dictionary<int, string> ParameterTypes { get; }
         protected abstract IDbDataAdapter GetAdapter(IDbCommand command);
+        
+        protected virtual void SetParamProperties(IDbDataParameter dbParam, Query.Parameter queryParam)
+        {
+            // by default, the param type is an int cast of the param type,
+            // but this allows SQL Server to behave a little differently
+            dbParam.DbType = (DbType)queryParam.Type;
+        }
 
         public (bool result, string? message) TestConnection()
         {
@@ -45,8 +52,9 @@ namespace Zinger2.Service.Abstract
             foreach (var p in query.Parameters)
             {
                 var param = cmd.CreateParameter();
-                param.ParameterName = p.Name;
-
+                param.ParameterName = p.Name;               
+                param.Value = p.Value ?? DBNull.Value;
+                SetParamProperties(param, p);
                 cmd.Parameters.Add(param);
             }
 
