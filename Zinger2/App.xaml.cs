@@ -30,6 +30,7 @@ namespace Zinger2
             services.AddSingleton<ConnectionStore>();
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<ConnectionsWindow>();
         }
     }
 }

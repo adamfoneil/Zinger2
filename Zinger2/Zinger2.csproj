@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Zinger2.Service\Zinger2.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Static\" />
+  </ItemGroup>
+
 </Project>

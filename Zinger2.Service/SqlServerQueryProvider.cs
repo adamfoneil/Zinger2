@@ -2,6 +2,7 @@
 using System.Data;
 using Zinger2.Service.Abstract;
 using Zinger2.Service.Models;
+using Zinger2.Service.Static;
 
 namespace Zinger2.Service
 {
@@ -14,7 +15,7 @@ namespace Zinger2.Service
             _connectionString = connectionString;
         }
 
-        public override Dictionary<int, string> ParameterTypes => EnumToDictionary<SqlDbType>();
+        public override Dictionary<int, string> ParameterTypes => EnumHelper.ToDictionary<SqlDbType>();
 
         protected override IDbDataAdapter GetAdapter(IDbCommand command) => new SqlDataAdapter(command as SqlCommand);
 

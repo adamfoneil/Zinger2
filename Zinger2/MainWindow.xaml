@@ -17,7 +17,7 @@
                 <MenuItem Header="New"/>
                 <MenuItem Header="Open..."/>
                 <Separator/>
-                <MenuItem Header="Connections..."/>
+                <MenuItem Header="Connections..." Click="mnuFileConnections"/>
                 <Separator/>
                 <MenuItem Header="Exit"/>
             </MenuItem>

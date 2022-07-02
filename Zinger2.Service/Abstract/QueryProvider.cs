@@ -96,17 +96,6 @@ namespace Zinger2.Service.Abstract
             }
         }
 
-        protected Dictionary<int, string> EnumToDictionary<TEnum>() where TEnum : struct, Enum
-        {
-            var names = Enum.GetNames<TEnum>();
-            var values = Enum.GetValues<TEnum>();
-            return values.Select((val, index) => new
-            {
-                Name = names[index],
-                Value = Convert.ToInt32(val)
-            }).ToDictionary(item => item.Value, item => item.Name);
-        }
-
         public class ExecuteResult
         {
             public TimeSpan Elapsed { get; init; }
