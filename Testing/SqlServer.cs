@@ -1,3 +1,4 @@
+using Dapper;
 using SqlServer.LocalDb;
 using System.Data;
 using Zinger2.Service;
@@ -307,5 +308,20 @@ namespace Testing
 	public bool? IsEdge { get; set; }
 }"));
 		}
+
+        [TestMethod]
+		public async Task QueryWithTableParam()
+        {
+			using var cn = LocalDb.GetConnection("ZingerSample");
+
+			await cn.ExecuteAsync(
+				@"DROP TYPE IF EXISTS [dbo].[IdList];
+
+				CREATE TYPE [dbo].[IdList] AS TABLE (
+					[Id] int NOT NULL PRIMARY KEY
+				)");
+
+
+        }
     }
 }
