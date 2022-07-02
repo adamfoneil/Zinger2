@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zinger2.ViewModels;
 
 namespace Zinger2
 {
@@ -20,8 +21,11 @@ namespace Zinger2
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly MainWindowViewModel _viewModel;
+
+        public MainWindow(MainWindowViewModel viewModel)
         {
+            _viewModel = viewModel;
             InitializeComponent();
         }
     }
