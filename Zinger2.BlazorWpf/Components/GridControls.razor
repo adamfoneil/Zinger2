@@ -15,7 +15,7 @@
 
         @if (allowDelete)
         {
-            <RadzenButton ButtonStyle="@DeleteButtonStyle()" Icon="delete" Click="@(args => OnDeleteRow(row))"/>
+            <RadzenButton ButtonStyle="@DeleteButtonStyle" Icon="delete" Click="@(args => OnDeleteRow(row))"/>
         }        
 
         @ChildContent?.Invoke(row)
@@ -57,7 +57,7 @@
     [Parameter]
     public bool ImmediateEffect { get; set; } = true;
 
-    ButtonStyle DeleteButtonStyle() => (ImmediateEffect) ? ButtonStyle.Danger : ButtonStyle.Warning;
+    ButtonStyle DeleteButtonStyle => (ImmediateEffect) ? ButtonStyle.Danger : ButtonStyle.Warning;
 
     async Task OnDeleteRow(TItem row) => await DeleteRow.InvokeAsync(row);
 }

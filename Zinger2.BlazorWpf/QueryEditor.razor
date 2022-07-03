@@ -1,4 +1,5 @@
-﻿@inject ConnectionStore Connections
+﻿@using System.Collections.ObjectModel
+@inject ConnectionStore Connections
 
 
 <main class="p-2">
@@ -11,7 +12,7 @@
     @if (currentQuery != null)
     {
         <div class="d-flex">
-            <RadzenTextArea @bind-Value="currentQuery.Sql" class="w-100" Disabled="@(connectionName is null)" Style="height:300px"/>
+            <RadzenTextArea @bind-Value="currentQuery.Sql" class="w-100" Disabled="@(connectionName is null)" Style="height:300px;font-family:Consolas"/>
         </div>    
     }
     
@@ -19,10 +20,9 @@
         <RadzenAccordion>
             <Items>
                 <RadzenAccordionItem Text="Manage Connections" Icon="settings">
+                    <RadzenButton Text="Add" Icon="add_circle_outline" Click="@(() => grid.InsertRow(new Connection()))" class="my-2"/>
 
-                    <RadzenButton Text="Add" Icon="add_circle_outline" Click="AddConnection" class="my-2"/>
-
-                    <RadzenGrid TItem="Connection" Data="connections" @ref="grid" RowUpdate="SaveConnections" RowCreate="SaveConnections">
+                    <RadzenGrid TItem="Connection" Data="connections" @ref="grid" RowCreate="OnConnectionAdded">
 	                    <Columns>
 		                    <RadzenGridColumn TItem="Connection" Title="Connection Name" Property="Name">
 			                    <Template Context="item">
@@ -63,17 +63,18 @@
 
 
 @code {
-    RadzenGrid<Connection> grid;
-    List<Connection> connections;
-    Dictionary<string, Connection> connectionsByName;
-    string connectionName;
-    Connection currentConnection;
-    Service.Models.Query currentQuery;
-    Dictionary<int, string> connectionTypes;
+    RadzenGrid<Connection>? grid;
+    ObservableCollection<Connection>? connections;
+    Dictionary<string, Connection>? connectionsByName;
+    string? connectionName;
+    Connection? currentConnection;
+    Service.Models.Query? currentQuery;
+    Dictionary<int, string>? connectionTypes;
+    int id = 0;
 
     protected override async Task OnInitializedAsync()
-    {
-        connections = (await Connections.GetConnectionsAsync()).ToList();
+    {        
+        connections = new ObservableCollection<Connection>(await Connections.GetConnectionsAsync());
         connectionsByName = connections.ToDictionary(item => item.Name ?? string.Empty);
         connectionTypes = EnumHelper.ToDictionary<ConnectionType>();
         currentQuery = new();
@@ -89,5 +90,8 @@
         currentConnection = (!string.IsNullOrEmpty(connectionName)) ? connectionsByName[connectionName] : null;
     }
 
-    void AddConnection() => grid.InsertRow(new Connection());    
+    void OnConnectionAdded(Connection connection)
+    {
+        connections.Add(connection);
+    }
 }

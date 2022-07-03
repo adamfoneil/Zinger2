@@ -17,7 +17,7 @@ namespace Zinger2.Service.Models
         public string? ConnectionString { get; set; }
 
         /// <summary>
-        /// this is so Radzen dropdown binding works
+        /// this is so dropdown binding works
         /// </summary>
         [JsonIgnore]
         public int BindType

@@ -9,7 +9,7 @@ namespace Zinger2
     public partial class MainWindow : Window
     {
         private readonly MainWindowViewModel _viewModel;
-        private readonly ConnectionsWindow _connectionsWin;
+        private readonly ConnectionsWindow _connectionsWin;        
 
         public MainWindow(MainWindowViewModel viewModel, ConnectionsWindow connectionsWin)
         {
