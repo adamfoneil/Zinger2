@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing", "Testing\Testing.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger2.Wpf", "Zinger2.Wpf\Zinger2.Wpf.csproj", "{C450639D-76F4-43BF-94F1-8D9097D20BC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zinger2.BlazorWpf", "Zinger2.BlazorWpf\Zinger2.BlazorWpf.csproj", "{F4F130B0-D00F-4443-B4DD-8F36002B1E92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger2.BlazorWpf", "Zinger2.BlazorWpf\Zinger2.BlazorWpf.csproj", "{F4F130B0-D00F-4443-B4DD-8F36002B1E92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

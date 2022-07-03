@@ -1,46 +1,93 @@
 ﻿@inject ConnectionStore Connections
 
+
 <main class="p-2">
-    <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a href="#" class="nav-link">Connections</a>
-            </li>
-            <li class="nav-item">
-                <RadzenDropDown Data="connections" ValueProperty="Name" TextProperty="Name" @bind-Value="currentConnection" AllowClear="true"/>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Something Else</a>
-            </li>
-        </ul>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="d-flex align-items-center">
+            <RadzenDropDown Data="connections" ValueProperty="Name" TextProperty="Name" @bind-Value="connectionName" AllowClear="true" class="m-1" Change="SetConnection"/>
+        </div>
     </nav>
 
     @if (currentQuery != null)
     {
         <div class="d-flex">
-            <RadzenTextArea @bind-Value="currentQuery.Sql" class="w-100"/>
+            <RadzenTextArea @bind-Value="currentQuery.Sql" class="w-100" Disabled="@(connectionName is null)" Style="height:300px"/>
         </div>    
     }
     
-    <div class="d-flex align-items-center">
-        <h3 class="mr-2">Hello</h3>
-        <div class="validation-message">I am a message</div>
+    <div>
+        <RadzenAccordion>
+            <Items>
+                <RadzenAccordionItem Text="Manage Connections" Icon="settings">
 
-    </div>    
+                    <RadzenButton Text="Add" Icon="add_circle_outline" Click="AddConnection" class="my-2"/>
+
+                    <RadzenGrid TItem="Connection" Data="connections" @ref="grid" RowUpdate="SaveConnections" RowCreate="SaveConnections">
+	                    <Columns>
+		                    <RadzenGridColumn TItem="Connection" Title="Connection Name" Property="Name">
+			                    <Template Context="item">
+				                    <span>@item.Name</span>
+			                    </Template>
+			                    <EditTemplate Context="item">
+				                    <RadzenTextBox @bind-Value="item.Name"/>
+			                    </EditTemplate>
+		                    </RadzenGridColumn>
+		                    
+                            <RadzenGridColumn TItem="Connection" Title="Connection String" Property="ConnectionString">
+			                    <Template Context="item">
+				                    <span>@item.ConnectionString</span>
+			                    </Template>
+			                    <EditTemplate Context="item">
+				                    <RadzenTextBox @bind-Value="item.ConnectionString"/>
+			                    </EditTemplate>
+		                    </RadzenGridColumn>
+		                    
+                            <RadzenGridColumn TItem="Connection" Title="Type" Property="Type">
+			                    <Template Context="item">
+				                    <span>@item.Type</span>
+			                    </Template>
+			                    <EditTemplate Context="item">
+				                    <RadzenDropDown @bind-Value="item.BindType" Data="connectionTypes" ValueProperty="Key" TextProperty="Value"/>
+			                    </EditTemplate>
+		                    </RadzenGridColumn>
+
+                            <GridControls Grid="grid" TItem="Connection"/>
+	                    </Columns>
+                    </RadzenGrid>
+                </RadzenAccordionItem>
+            </Items>
+        </RadzenAccordion>
+    </div>
 
 </main>
 
 
 @code {
-    IEnumerable<Connection> connections;
+    RadzenGrid<Connection> grid;
+    List<Connection> connections;
     Dictionary<string, Connection> connectionsByName;
-    string currentConnection;
-    Zinger2.Service.Models.Query currentQuery;
+    string connectionName;
+    Connection currentConnection;
+    Service.Models.Query currentQuery;
+    Dictionary<int, string> connectionTypes;
 
     protected override async Task OnInitializedAsync()
     {
-        connections = await Connections.GetConnectionsAsync();
+        connections = (await Connections.GetConnectionsAsync()).ToList();
         connectionsByName = connections.ToDictionary(item => item.Name ?? string.Empty);
+        connectionTypes = EnumHelper.ToDictionary<ConnectionType>();
         currentQuery = new();
     }
+
+    async Task SaveConnections()
+    {
+        await Connections.SaveConnectionsAsync(connections);
+    }
+
+    void SetConnection()
+    {
+        currentConnection = (!string.IsNullOrEmpty(connectionName)) ? connectionsByName[connectionName] : null;
+    }
+
+    void AddConnection() => grid.InsertRow(new Connection());    
 }
