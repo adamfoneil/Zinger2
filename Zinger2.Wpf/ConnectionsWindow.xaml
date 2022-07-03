@@ -20,7 +20,10 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Connection Name" Binding="{Binding Name}" MinWidth="120"/>
                 <DataGridTextColumn Header="Connection String" Binding="{Binding ConnectionString}" Width="*"/>
-                <DataGridComboBoxColumn Header="Type" ItemsSource="{Binding ConnectionTypes}" MinWidth="120"/>
+                <DataGridComboBoxColumn Header="Type"                                          
+                                        SelectedItemBinding="{Binding BindType}"
+                                        MinWidth="120" 
+                                        DisplayMemberPath="Value" SelectedValuePath="Key" x:Name="ConnectionTypeDropdown"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
