@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using Zinger2.Service;
 
 namespace Zinger2.BlazorWpf
 {
@@ -11,6 +12,7 @@ namespace Zinger2.BlazorWpf
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddWpfBlazorWebView();
+            serviceCollection.AddSingleton<ConnectionStore>();
             Resources.Add("services", serviceCollection.BuildServiceProvider());
         }
     }

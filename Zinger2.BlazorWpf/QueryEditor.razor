@@ -1,0 +1,46 @@
+﻿@inject ConnectionStore Connections
+
+<main class="p-2">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Connections</a>
+            </li>
+            <li class="nav-item">
+                <RadzenDropDown Data="connections" ValueProperty="Name" TextProperty="Name" @bind-Value="currentConnection" AllowClear="true"/>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Something Else</a>
+            </li>
+        </ul>
+    </nav>
+
+    @if (currentQuery != null)
+    {
+        <div class="d-flex">
+            <RadzenTextArea @bind-Value="currentQuery.Sql" class="w-100"/>
+        </div>    
+    }
+    
+    <div class="d-flex align-items-center">
+        <h3 class="mr-2">Hello</h3>
+        <div class="validation-message">I am a message</div>
+
+    </div>    
+
+</main>
+
+
+@code {
+    IEnumerable<Connection> connections;
+    Dictionary<string, Connection> connectionsByName;
+    string currentConnection;
+    Zinger2.Service.Models.Query currentQuery;
+
+    protected override async Task OnInitializedAsync()
+    {
+        connections = await Connections.GetConnectionsAsync();
+        connectionsByName = connections.ToDictionary(item => item.Name ?? string.Empty);
+        currentQuery = new();
+    }
+}

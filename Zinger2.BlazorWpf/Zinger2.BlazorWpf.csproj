@@ -9,6 +9,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="6.0.400" />
+    <PackageReference Include="Radzen.Blazor" Version="3.19.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zinger2.Service\Zinger2.Service.csproj" />
   </ItemGroup>
 
 </Project>
