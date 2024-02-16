@@ -1,27 +1,26 @@
 ﻿using System.Windows;
 using Zinger.ViewModels;
 
-namespace Zinger
+namespace Zinger;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
+    private readonly MainWindowViewModel _viewModel;
+    private readonly ConnectionsWindow _connectionsWin;        
+
+    public MainWindow(MainWindowViewModel viewModel, ConnectionsWindow connectionsWin)
     {
-        private readonly MainWindowViewModel _viewModel;
-        private readonly ConnectionsWindow _connectionsWin;        
+        _viewModel = viewModel;            
+        _connectionsWin = connectionsWin;
 
-        public MainWindow(MainWindowViewModel viewModel, ConnectionsWindow connectionsWin)
-        {
-            _viewModel = viewModel;            
-            _connectionsWin = connectionsWin;
+        //InitializeComponent();
+    }
 
-            //InitializeComponent();
-        }
-
-        private void mnuFileConnections(object sender, RoutedEventArgs e)
-        {
-            _connectionsWin.Show();
-        }
+    private void MnuFileConnections(object sender, RoutedEventArgs e)
+    {
+        _connectionsWin.Show();
     }
 }

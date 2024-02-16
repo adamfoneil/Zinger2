@@ -1,9 +1,9 @@
-﻿<Window x:Class="Zinger2.MainWindow"
+﻿<Window x:Class="Zinger.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Zinger2"
+        xmlns:local="clr-namespace:Zinger"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -17,7 +17,7 @@
                 <MenuItem Header="New"/>
                 <MenuItem Header="Open..."/>
                 <Separator/>
-                <MenuItem Header="Connections..." Click="mnuFileConnections"/>
+                <MenuItem Header="Connections..." Click="MnuFileConnections"/>
                 <Separator/>
                 <MenuItem Header="Exit"/>
             </MenuItem>
