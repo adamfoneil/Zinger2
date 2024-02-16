@@ -13,7 +13,7 @@
             get
             {
                 string name = PropertyName;
-                return name.Substring(0, 1).ToUpper() + name.Substring(1);
+                return name[..1].ToUpper() + name[1..];
             }
         }
 
