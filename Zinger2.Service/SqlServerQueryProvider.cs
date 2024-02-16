@@ -4,31 +4,30 @@ using Zinger2.Service.Abstract;
 using Zinger2.Service.Models;
 using Zinger2.Service.Static;
 
-namespace Zinger2.Service
+namespace Zinger2.Service;
+
+public class SqlServerQueryProvider : QueryProvider
 {
-    public class SqlServerQueryProvider : QueryProvider
-    {
-        private readonly string _connectionString;
+	private readonly string _connectionString;
 
-        public SqlServerQueryProvider(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
+	public SqlServerQueryProvider(string connectionString)
+	{
+		_connectionString = connectionString;
+	}
 
-        public override Dictionary<int, string> ParameterTypes => EnumHelper.ToDictionary<SqlDbType>();
+	public override Dictionary<int, string> ParameterTypes => EnumHelper.ToDictionary<SqlDbType>();
 
-        protected override IDbDataAdapter GetAdapter(IDbCommand command) => new SqlDataAdapter(command as SqlCommand);
+	protected override IDbDataAdapter GetAdapter(IDbCommand command) => new SqlDataAdapter(command as SqlCommand);
 
-        protected override IDbCommand GetCommand(IDbConnection connection, Query query) => new SqlCommand(query.Sql, connection as SqlConnection);
+	protected override IDbCommand GetCommand(IDbConnection connection, Query query) => new SqlCommand(query.Sql, connection as SqlConnection);
 
-        protected override IDbConnection GetConnection() => new SqlConnection(_connectionString);
+	protected override IDbConnection GetConnection() => new SqlConnection(_connectionString);
 
-        protected override void SetParamProperties(IDbDataParameter dbParam, Query.Parameter queryParam)
-        {
-            if (dbParam is SqlParameter sqlParam)
-            {
-                sqlParam.SqlDbType = (SqlDbType)queryParam.Type;
-            }
-        }
-    }
+	protected override void SetParamProperties(IDbDataParameter dbParam, Query.Parameter queryParam)
+	{
+		if (dbParam is SqlParameter sqlParam)
+		{
+			sqlParam.SqlDbType = (SqlDbType)queryParam.Type;
+		}
+	}
 }
