@@ -208,7 +208,7 @@ public class SqlServer
                 new Query.Parameter()
                 {
                     Name = "name",
-                    Type = (int)SqlDbType.NVarChar,
+                    Type = (DbType)SqlDbType.NVarChar,
                     Value = "de"
                 }
             }.ToList()

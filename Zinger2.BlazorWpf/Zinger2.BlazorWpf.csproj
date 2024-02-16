@@ -8,11 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="6.0.400" />
-    <PackageReference Include="Radzen.Blazor" Version="3.19.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="8.0.7" />
+    <PackageReference Include="Radzen.Blazor" Version="4.24.7" />
+    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Zinger.Service.Windows\Zinger.Service.Windows.csproj" />
     <ProjectReference Include="..\Zinger.Service\Zinger.Service.csproj" />
   </ItemGroup>
 

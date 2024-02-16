@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Zinger.Service.Internal
+namespace Zinger.Service.Windows.Internal
 {
     internal static class DataProtection
     {

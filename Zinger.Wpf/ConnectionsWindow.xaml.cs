@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using Zinger.Service;
 using Zinger.Service.Models;
@@ -12,16 +13,16 @@ namespace Zinger
 	/// </summary>
 	public partial class ConnectionsWindow : Window
     {
-        private readonly ConnectionStore _connectionStore;
+        private readonly LocalConnectionStore _connectionStore;
 
-        public ConnectionsWindow(ConnectionStore connectionStore)
+        public ConnectionsWindow(LocalConnectionStore connectionStore)
         {
             DataContext = this;
 
             _connectionStore = connectionStore;
 
             SavedConnections = new ObservableCollection<Connection>();
-            ConnectionTypes = EnumHelper.ToDictionary<ConnectionType>();
+            ConnectionTypes = EnumHelper.ToDictionary<DatabaseType>();
 
             InitializeComponent();
             ConnectionTypeDropdown.ItemsSource = ConnectionTypes;            
@@ -32,7 +33,7 @@ namespace Zinger
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var list = await _connectionStore.GetConnectionsAsync();
+            var list = await _connectionStore.GetAllAsync().ToListAsync();
             foreach (var item in list) SavedConnections.Add(item);            
         }
     }

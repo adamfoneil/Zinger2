@@ -2,7 +2,7 @@
 
 namespace Zinger.Service.Models;
 
-public enum ConnectionType
+public enum DatabaseType
 {
     SqlServer,
     MySql,
@@ -13,8 +13,8 @@ public enum ConnectionType
 
 public class Connection
 {
-    public string? Name { get; set; }
-    public ConnectionType Type { get; set; }
+    public string Name { get; set; } = default!;
+    public DatabaseType Type { get; set; }
     public string? ConnectionString { get; set; }
 
     /// <summary>
@@ -24,7 +24,7 @@ public class Connection
     public int BindType
     {
         get => (int)Type;
-        set => Type = (ConnectionType)value;
+        set => Type = (DatabaseType)value;
     }
 
     public override bool Equals(object? obj)
@@ -37,5 +37,7 @@ public class Connection
         return false;
     }
 
-    public override int GetHashCode() => (Name?.ToLower() + Type.ToString() + ConnectionString?.ToLower()).GetHashCode();
+	public override string ToString() => $"{Name} ({Type})";
+	
+	public override int GetHashCode() => (Name?.ToLower() + Type.ToString() + ConnectionString?.ToLower()).GetHashCode();
 }

@@ -1,5 +1,5 @@
 ﻿@using System.Collections.ObjectModel
-@inject ConnectionStore Connections
+@inject LocalConnectionStore Connections
 
 
 <main class="p-2">
@@ -74,15 +74,15 @@
 
     protected override async Task OnInitializedAsync()
     {        
-        connections = new ObservableCollection<Connection>(await Connections.GetConnectionsAsync());
+        connections = new ObservableCollection<Connection>(await Connections.GetAllAsync().ToListAsync());
         connectionsByName = connections.ToDictionary(item => item.Name ?? string.Empty);
-        connectionTypes = EnumHelper.ToDictionary<ConnectionType>();
+        connectionTypes = EnumHelper.ToDictionary<DatabaseType>();
         currentQuery = new();
     }
 
     async Task SaveConnections()
     {
-        await Connections.SaveConnectionsAsync(connections);
+        //await Connections.SaveConnectionsAsync(connections);
     }
 
     void SetConnection()

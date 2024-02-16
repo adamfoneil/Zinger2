@@ -7,7 +7,7 @@ namespace Zinger.Service.Abstract
 {
 	public abstract class QueryProvider
     {
-        public ConnectionType Type { get; }
+        public DatabaseType Type { get; }
 
         protected abstract IDbConnection GetConnection();
         protected abstract IDbCommand GetCommand(IDbConnection connection, Query query);

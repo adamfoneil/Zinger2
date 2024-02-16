@@ -27,7 +27,7 @@ public partial class App : Application
 
     private static void ConfigureServices(ServiceCollection services)
     {
-        services.AddSingleton<ConnectionStore>();
+        services.AddSingleton<LocalConnectionStore>();
         services.AddSingleton<MainWindow>();
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<ConnectionsWindow>();

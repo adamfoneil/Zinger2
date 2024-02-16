@@ -4,9 +4,9 @@ namespace Zinger.ViewModels
 {
 	public class MainWindowViewModel
     {
-        private readonly ConnectionStore _connectionStore;
+        private readonly LocalConnectionStore _connectionStore;
 
-        public MainWindowViewModel(ConnectionStore connectionStore)
+        public MainWindowViewModel(LocalConnectionStore connectionStore)
         {
             _connectionStore = connectionStore;
         }

@@ -12,7 +12,7 @@ public class Query
     public class Parameter
     {
         public string? Name { get; set; }
-        public int Type { get; set; }
+        public DbType Type { get; set; }
         public object? Value { get; set; }
     }
 }

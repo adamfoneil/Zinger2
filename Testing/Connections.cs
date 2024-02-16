@@ -15,26 +15,27 @@ public class Connections
             {
                 Name = "this",
                 ConnectionString = "connection string alpha",
-                Type = ConnectionType.SqlLite
+                Type = DatabaseType.SqlLite
             },
             new Connection()
             {
                 Name = "that",
                 ConnectionString = "connection string bravo",
-                Type = ConnectionType.OleDb
+                Type = DatabaseType.OleDb
             },
             new Connection()
             {
                 Name = "other",
                 ConnectionString = "connection string charlie",
-                Type = ConnectionType.MySql
+                Type = DatabaseType.MySql
             }
         };
 
-        var store = new ConnectionStore();
-        await store.SaveConnectionsAsync(connections);
+        var store = new LocalConnectionStore();
+        foreach (var cn in  connections) await store.SaveAsync(cn);
+        
+        var result = (await store.GetAllAsync().ToArrayAsync()).OrderBy(row => row.Name);
 
-        var result = await store.GetConnectionsAsync();
-        Assert.IsTrue(result.SequenceEqual(connections));
+        Assert.IsTrue(result.SequenceEqual(connections.OrderBy(row => row.Name)));
     }
 }

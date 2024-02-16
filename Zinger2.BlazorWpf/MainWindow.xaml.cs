@@ -12,7 +12,7 @@ namespace Zinger.BlazorWpf
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddWpfBlazorWebView();
-            serviceCollection.AddSingleton<ConnectionStore>();
+            serviceCollection.AddSingleton<LocalConnectionStore>();
             Resources.Add("services", serviceCollection.BuildServiceProvider());
         }
     }
