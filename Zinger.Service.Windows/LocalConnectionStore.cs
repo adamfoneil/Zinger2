@@ -37,8 +37,7 @@ public class LocalConnectionStore(string basePath) : IConnectionStore
 		
         var content = await File.ReadAllTextAsync(file);
         var json = DataProtection.Decrypt(content);
-        var connection = JsonSerializer.Deserialize<Connection>(json) ?? throw new Exception("Couldn't deserialize connection data");
-        return connection;
+        return JsonSerializer.Deserialize<Connection>(json) ?? throw new Exception("Couldn't deserialize connection data");        
 	}
 
     public async IAsyncEnumerable<Connection> GetAllAsync()
