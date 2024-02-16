@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
-using Zinger2.Service;
+using Zinger.Service;
 
-namespace Zinger2.BlazorWpf
+namespace Zinger.BlazorWpf
 {
-    public partial class MainWindow : Window
+	public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            InitializeComponent();
+            //InitializeComponent();
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddWpfBlazorWebView();

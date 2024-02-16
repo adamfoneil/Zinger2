@@ -1,41 +1,40 @@
-﻿using Zinger2.Service;
-using Zinger2.Service.Models;
+﻿using Zinger.Service;
+using Zinger.Service.Models;
 
-namespace Testing
+namespace Testing;
+
+[TestClass]
+public class Connections
 {
-    [TestClass]
-    public class Connections
+    [TestMethod]
+    public async Task TestConnectionStore()
     {
-        [TestMethod]
-        public async Task TestConnectionStore()
+        var connections = new[]
         {
-            var connections = new[]
+            new Connection()
             {
-                new Connection()
-                {
-                    Name = "this",
-                    ConnectionString = "connection string alpha",
-                    Type = ConnectionType.SqlLite
-                },
-                new Connection()
-                {
-                    Name = "that",
-                    ConnectionString = "connection string bravo",
-                    Type = ConnectionType.OleDb
-                },
-                new Connection()
-                {
-                    Name = "other",
-                    ConnectionString = "connection string charlie",
-                    Type = ConnectionType.MySql
-                }
-            };
+                Name = "this",
+                ConnectionString = "connection string alpha",
+                Type = ConnectionType.SqlLite
+            },
+            new Connection()
+            {
+                Name = "that",
+                ConnectionString = "connection string bravo",
+                Type = ConnectionType.OleDb
+            },
+            new Connection()
+            {
+                Name = "other",
+                ConnectionString = "connection string charlie",
+                Type = ConnectionType.MySql
+            }
+        };
 
-            var store = new ConnectionStore();
-            await store.SaveConnectionsAsync(connections);
+        var store = new ConnectionStore();
+        await store.SaveConnectionsAsync(connections);
 
-            var result = await store.GetConnectionsAsync();
-            Assert.IsTrue(result.SequenceEqual(connections));
-        }
+        var result = await store.GetConnectionsAsync();
+        Assert.IsTrue(result.SequenceEqual(connections));
     }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Zinger2.BlazorWpf
+namespace Zinger.BlazorWpf
 {
     /// <summary>
     /// Interaction logic for App.xaml
