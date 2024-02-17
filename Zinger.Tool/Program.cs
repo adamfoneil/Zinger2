@@ -2,6 +2,7 @@
 using CommandLine;
 using Zinger.Service;
 using Zinger.Service.Abstract;
+using Zinger.Service.Interfaces;
 using Zinger.Service.Models;
 using Zinger.Service.QueryProviders;
 using Zinger.Service.Static;
@@ -27,25 +28,62 @@ internal class Program
 					case Command.StoreConnection:
 						await store.SaveAsync(new Connection()
 						{
-							Name = options.ConnectionName,
+							Name = options.ConnectionName ?? throw new Exception("Connection name required when storing a connection"),
 							ConnectionString = options.ConnectionString,
 							Type = options.DatabaseType ?? throw new Exception("Database type is required when saving a connection")
 						});
 						break;
 
 					case Command.TestConnections:
+						await TestConnectionsAsync(store);
 						break;
 				}
 			});
 	}
 
-	private static async Task GenerateResultClassAsync(Options options, LocalConnectionStore store)
+    private static async Task TestConnectionsAsync(IConnectionStore store)
+    {
+		var allConnections = await store.GetAllAsync().ToArrayAsync();
+
+		foreach (var connectionGrp in allConnections.GroupBy(cn => cn.Type))
+		{
+			Console.ForegroundColor = ConsoleColor.Gray;
+			Console.WriteLine(connectionGrp.Key);
+			foreach (var connection in connectionGrp)
+			{
+                QueryProvider queryProvider = connection.Type switch
+                {
+                    DatabaseType.SqlServer => new SqlServerQueryProvider(connection.ConnectionString!),
+                    DatabaseType.MySql => new MySqlQueryProvider(connection.ConnectionString!),
+                    DatabaseType.PostgreSql => new PostgreSqlQueryProvider(connection.ConnectionString!),
+                    _ => throw new NotSupportedException()
+                };
+
+                var (success, message) = queryProvider.TestConnection();
+                if (success)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"- {connection.Name} opened successfully");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"- {connection.Name} failed: {message}");
+                }
+            }
+			
+		}
+
+		Console.ForegroundColor = ConsoleColor.Gray;
+    }
+
+    private static async Task GenerateResultClassAsync(Options options, LocalConnectionStore store)
 	{
-		options.ConnectionName ??= PathHelper.InferConnectionName(options.InputFilePath, store.GetNames()) ?? throw new Exception("Couldn't determine the connection name");
-		var connection = await store.LoadAsync(options.ConnectionName) ?? throw new Exception($"Connection name {options.ConnectionName} not found");
-		
-		if (connection.ConnectionString is null) throw new ArgumentNullException(nameof(connection.ConnectionString));
-		if (!File.Exists(options.InputFilePath)) throw new FileNotFoundException($"File not found: {options.InputFilePath}");
+        if (!File.Exists(options.InputFilePath)) throw new FileNotFoundException($"File not found: {options.InputFilePath}");
+
+        options.ConnectionName ??= PathHelper.InferConnectionName(options.InputFilePath, store.GetNames()) ?? throw new Exception("Couldn't determine the connection name");
+		var connection = await store.LoadAsync(options.ConnectionName) ?? throw new Exception($"Connection name {options.ConnectionName} not found");		
+		if (connection.ConnectionString is null) throw new ArgumentNullException(nameof(connection.ConnectionString));		
 		options.DatabaseType ??= PathHelper.InferDatabaseType(options.InputFilePath) ?? throw new Exception("Couldn't determine database type.");
 
 		QueryProvider queryProvider = options.DatabaseType switch

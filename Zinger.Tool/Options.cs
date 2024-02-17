@@ -12,6 +12,7 @@ internal enum Command
 
 internal class Options
 {
+	[Option]
 	public Command Command { get; set; } = Command.GenerateResultClass;
 
 	/// <summary>
