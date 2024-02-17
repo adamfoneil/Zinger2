@@ -6,7 +6,8 @@ namespace Zinger.Tool;
 internal enum Command
 {
 	StoreConnection,
-	GenerateResultClass
+	GenerateResultClass,
+	TestConnections
 }
 
 internal class Options

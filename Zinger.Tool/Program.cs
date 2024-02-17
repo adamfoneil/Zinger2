@@ -1,11 +1,15 @@
 ﻿
 using CommandLine;
+using Zinger.Service;
+using Zinger.Service.Models;
 using Zinger.Tool;
 
 internal class Program
 {
 	private static async void Main(string[] args)
 	{
+		var store = new LocalConnectionStore();
+
 		await Parser
 			.Default
 			.ParseArguments<Options>(args)
@@ -14,17 +18,20 @@ internal class Program
 				switch (options.Command)
 				{
 					case Command.StoreConnection:
-						await StoreConnectionAsync(options.ConnectionName, options.ConnectionString);
+						await store.SaveAsync(new Connection()
+						{
+							Name = options.ConnectionName,
+							ConnectionString = options.ConnectionString,
+							Type = options.DatabaseType
+						});
 						break;
 
 					case Command.GenerateResultClass:
 						break;
+
+					case Command.TestConnections:
+						break;
 				}
 			});
-	}
-
-	private static async Task StoreConnectionAsync(string connectionName, string connectionString)
-	{
-		throw new NotImplementedException();
 	}
 }
