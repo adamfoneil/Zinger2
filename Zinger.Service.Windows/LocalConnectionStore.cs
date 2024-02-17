@@ -13,11 +13,13 @@ public class LocalConnectionStore(string basePath) : IConnectionStore
 {
     private readonly string _basePath = basePath;
 
+    private const string Ext = ".cn";
+
 	public LocalConnectionStore() : this(DefaultBasePath)
     {
     }
 
-    private string GetFilename(string connectionName) => Path.Combine(_basePath, $"{connectionName}.dat");
+    private string GetFilename(string connectionName) => Path.Combine(_basePath, $"{connectionName}{Ext}");
     
 	public async Task SaveAsync(Connection connection)
 	{
@@ -52,7 +54,7 @@ public class LocalConnectionStore(string basePath) : IConnectionStore
 
     public string[] GetNames() =>
         Directory
-            .GetFiles(_basePath, "*.dat")
+            .GetFiles(_basePath, $"*{Ext}")
             .Select(fileName => Path.GetFileNameWithoutExtension(fileName))
             .ToArray();
 
