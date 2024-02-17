@@ -7,7 +7,7 @@ namespace Zinger.Service.Abstract
 {
 	public abstract class QueryProvider
     {
-        public DatabaseType Type { get; }
+        public abstract DatabaseType Type { get; }
 
         protected abstract IDbConnection GetConnection();
         protected abstract IDbCommand GetCommand(IDbConnection connection, Query query);
@@ -22,18 +22,16 @@ namespace Zinger.Service.Abstract
         {
             // by default, the param type is an int cast of the param type,
             // but this allows SQL Server to behave a little differently
-            dbParam.DbType = (DbType)queryParam.Type;
+            dbParam.DbType = queryParam.Type;
         }
 
         public (bool result, string? message) TestConnection()
         {
             try
             {
-                using (var cn = GetConnection())
-                {
-                    cn.Open();
-                    return (true, null);
-                }
+                using var cn = GetConnection();
+                cn.Open();
+                return (true, null);
             }
             catch (Exception exc)
             {
@@ -65,7 +63,7 @@ namespace Zinger.Service.Abstract
             await Task.Run(() => adapter.Fill(dataSet));
             sw.Stop();
 
-            List<string> resultClasses = new();
+            List<string> resultClasses = [];
             int nameIndex = 0;
             using var reader = cmd.ExecuteReader(CommandBehavior.SchemaOnly);
             do
@@ -96,11 +94,13 @@ namespace Zinger.Service.Abstract
             }
         }
 
+        public virtual object ConvertParamValue(object @object, DbType dbType) => @object;
+
         public class ExecuteResult
         {
             public TimeSpan Elapsed { get; init; }
             public DataSet DataSet { get; init; } = new();
-            public List<string> ResultClasses { get; init; } = new();
+            public List<string> ResultClasses { get; init; } = [];
         }
     }
 }

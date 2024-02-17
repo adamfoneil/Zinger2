@@ -4,10 +4,10 @@ namespace Zinger.Service.Models;
 
 public class Query
 {
-    public List<string> ResultClassNames { get; set; } = new();
+    public List<string> ResultClassNames { get; set; } = [];
     public CommandType CommandType { get; set; }
     public string? Sql { get; set; }
-    public List<Parameter> Parameters { get; set; } = new();
+    public List<Parameter> Parameters { get; set; } = [];
 
     public class Parameter
     {

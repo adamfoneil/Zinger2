@@ -3,6 +3,7 @@ using SqlServer.LocalDb;
 using System.Data;
 using Zinger.Service;
 using Zinger.Service.Models;
+using Zinger.Service.QueryProviders;
 
 namespace Testing;
 

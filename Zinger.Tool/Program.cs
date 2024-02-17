@@ -1,7 +1,9 @@
 ﻿
 using CommandLine;
 using Zinger.Service;
+using Zinger.Service.Abstract;
 using Zinger.Service.Models;
+using Zinger.Service.QueryProviders;
 using Zinger.Tool;
 
 internal class Program
@@ -17,6 +19,10 @@ internal class Program
 			{
 				switch (options.Command)
 				{
+					case Command.GenerateResultClass:
+						await GenerateResultClassAsync(options, store);
+						break;
+					
 					case Command.StoreConnection:
 						await store.SaveAsync(new Connection()
 						{
@@ -26,12 +32,38 @@ internal class Program
 						});
 						break;
 
-					case Command.GenerateResultClass:
-						break;
-
 					case Command.TestConnections:
 						break;
 				}
 			});
+	}
+
+	private static async Task GenerateResultClassAsync(Options options, LocalConnectionStore store)
+	{
+		var connection = await store.LoadAsync(options.ConnectionName) ?? throw new Exception($"Conncetion {options.ConnectionName} not found");
+		if (connection.ConnectionString is null) throw new ArgumentNullException(nameof(connection.ConnectionString));
+
+		QueryProvider queryProvider = options.DatabaseType switch
+		{
+			DatabaseType.SqlServer => new SqlServerQueryProvider(connection.ConnectionString),
+			DatabaseType.MySql => new MySqlQueryProvider(connection.ConnectionString),
+			DatabaseType.PostgreSql => new PostgreSqlQueryProvider(connection.ConnectionString),
+			_ => throw new NotSupportedException()
+		};
+
+		if (queryProvider.Type != connection.Type) throw new Exception($"Can't use {queryProvider.Type} with {connection.Type}");
+
+		var query = BuildQuery(options);
+		var result = await queryProvider.ExecuteAsync(query);
+
+		foreach (var csharpClass in result.ResultClasses)
+		{
+
+		}
+	}
+
+	private static Query BuildQuery(Options options)
+	{
+		throw new NotImplementedException();
 	}
 }
