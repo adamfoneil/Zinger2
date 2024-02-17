@@ -42,15 +42,19 @@ public class LocalConnectionStore(string basePath) : IConnectionStore
 
     public async IAsyncEnumerable<Connection> GetAllAsync()
     {
-        var files = Directory
-            .GetFiles(_basePath, "*.dat")
-            .Select(fileName => Path.GetFileNameWithoutExtension(fileName));
+        var files = GetNames();
 
         foreach (var file in files)
         {
             yield return await LoadAsync(file);
         }
     }
+
+    public string[] GetNames() =>
+        Directory
+            .GetFiles(_basePath, "*.dat")
+            .Select(fileName => Path.GetFileNameWithoutExtension(fileName))
+            .ToArray();
 
     public static string DefaultBasePath => Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), "Zinger");
 }

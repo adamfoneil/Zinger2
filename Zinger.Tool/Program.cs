@@ -4,13 +4,14 @@ using Zinger.Service;
 using Zinger.Service.Abstract;
 using Zinger.Service.Models;
 using Zinger.Service.QueryProviders;
+using Zinger.Service.Static;
 using Zinger.Tool;
 
 internal class Program
 {
-	private static async void Main(string[] args)
+	private static async Task Main(string[] args)
 	{
-		var store = new LocalConnectionStore();
+		var store = new LocalConnectionStore();		
 
 		await Parser
 			.Default
@@ -28,7 +29,7 @@ internal class Program
 						{
 							Name = options.ConnectionName,
 							ConnectionString = options.ConnectionString,
-							Type = options.DatabaseType
+							Type = options.DatabaseType ?? throw new Exception("Database type is required when saving a connection")
 						});
 						break;
 
@@ -40,8 +41,12 @@ internal class Program
 
 	private static async Task GenerateResultClassAsync(Options options, LocalConnectionStore store)
 	{
-		var connection = await store.LoadAsync(options.ConnectionName) ?? throw new Exception($"Conncetion {options.ConnectionName} not found");
+		options.ConnectionName ??= PathHelper.InferConnectionName(options.InputFilePath, store.GetNames()) ?? throw new Exception("Couldn't determine the connection name");
+		var connection = await store.LoadAsync(options.ConnectionName) ?? throw new Exception($"Connection name {options.ConnectionName} not found");
+		
 		if (connection.ConnectionString is null) throw new ArgumentNullException(nameof(connection.ConnectionString));
+		if (!File.Exists(options.InputFilePath)) throw new FileNotFoundException($"File not found: {options.InputFilePath}");
+		options.DatabaseType ??= PathHelper.InferDatabaseType(options.InputFilePath) ?? throw new Exception("Couldn't determine database type.");
 
 		QueryProvider queryProvider = options.DatabaseType switch
 		{
