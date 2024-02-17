@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger.Wpf", "Zinger.Wpf\Zi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger.WinForms", "Zinger.WinForms\Zinger.WinForms.csproj", "{57921966-7FAB-47C5-ACD4-EA8C711D9F15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zinger.Tool", "Zinger.Tool\Zinger.Tool.csproj", "{1B3CF53D-F5E5-44DE-85BF-78137D78451F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger.Tool", "Zinger.Tool\Zinger.Tool.csproj", "{1B3CF53D-F5E5-44DE-85BF-78137D78451F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zinger.Service.Windows", "Zinger.Service.Windows\Zinger.Service.Windows.csproj", "{C732558D-7207-4523-82A1-40C9DFE8E955}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger.Service.Windows", "Zinger.Service.Windows\Zinger.Service.Windows.csproj", "{C732558D-7207-4523-82A1-40C9DFE8E955}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zinger.OfflineServerApp", "Zinger.OfflineServerApp\Zinger.OfflineServerApp.csproj", "{7ACDE33F-08A2-4A1B-8956-EE4616A56A31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{C732558D-7207-4523-82A1-40C9DFE8E955}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C732558D-7207-4523-82A1-40C9DFE8E955}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C732558D-7207-4523-82A1-40C9DFE8E955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ACDE33F-08A2-4A1B-8956-EE4616A56A31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ACDE33F-08A2-4A1B-8956-EE4616A56A31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ACDE33F-08A2-4A1B-8956-EE4616A56A31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ACDE33F-08A2-4A1B-8956-EE4616A56A31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
