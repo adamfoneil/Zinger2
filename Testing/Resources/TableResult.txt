@@ -1,5 +1,6 @@
 public class TableResult
 {
+	[Column("name")]
 	[MaxLength(128)]
 	[Required]
 	public string Name { get; set; }
@@ -11,6 +12,7 @@ public class TableResult
 	public int SchemaId { get; set; }
 	[Column("parent_object_id")]
 	public int ParentObjectId { get; set; }
+	[Column("type")]
 	[MaxLength(2)]
 	public string Type { get; set; }
 	[Column("type_desc")]
@@ -61,7 +63,8 @@ public class TableResult
 	public bool? IsFiletable { get; set; }
 	[Column("is_memory_optimized")]
 	public bool? IsMemoryOptimized { get; set; }
-	public byte? durability { get; set; }
+	[Column("durability")]
+	public byte? Durability { get; set; }
 	[Column("durability_desc")]
 	[MaxLength(60)]
 	public string DurabilityDesc { get; set; }

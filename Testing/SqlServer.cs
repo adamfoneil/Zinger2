@@ -11,10 +11,11 @@ namespace Testing;
 [TestClass]
 public class SqlServer
 {
-    private string GetContent(string resourceName)
+    private static string GetContent(string resourceName)
     {
         using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName) ?? throw new Exception($"Resource not found: {resourceName}");
-        return new StreamReader(stream).ReadToEnd();
+        var result = new StreamReader(stream).ReadToEnd();
+        return result;
     }
 
     [TestMethod]

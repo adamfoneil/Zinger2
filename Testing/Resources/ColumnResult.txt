@@ -2,6 +2,7 @@ public class ColumnResult
 {
 	[Column("object_id")]
 	public int ObjectId { get; set; }
+	[Column("name")]
 	[MaxLength(128)]
 	public string Name { get; set; }
 	[Column("column_id")]
@@ -12,8 +13,10 @@ public class ColumnResult
 	public int UserTypeId { get; set; }
 	[Column("max_length")]
 	public short MaxLength { get; set; }
-	public byte precision { get; set; }
-	public byte scale { get; set; }
+	[Column("precision")]
+	public byte Precision { get; set; }
+	[Column("scale")]
+	public byte Scale { get; set; }
 	[Column("collation_name")]
 	[MaxLength(128)]
 	public string CollationName { get; set; }
