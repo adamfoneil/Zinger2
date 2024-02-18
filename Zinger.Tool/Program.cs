@@ -83,8 +83,8 @@ internal class Program
 
         options.ConnectionName ??= PathHelper.InferConnectionName(options.InputFilePath, store.GetNames()) ?? throw new Exception("Couldn't determine the connection name");
 		var connection = await store.LoadAsync(options.ConnectionName) ?? throw new Exception($"Connection name {options.ConnectionName} not found");		
-		if (connection.ConnectionString is null) throw new ArgumentNullException(nameof(connection.ConnectionString));		
-		options.DatabaseType ??= PathHelper.InferDatabaseType(options.InputFilePath) ?? throw new Exception("Couldn't determine database type.");
+		if (connection.ConnectionString is null) throw new ArgumentNullException(nameof(connection.ConnectionString));
+		options.DatabaseType ??= connection.Type;
 
 		QueryProvider queryProvider = options.DatabaseType switch
 		{
