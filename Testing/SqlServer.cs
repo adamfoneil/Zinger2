@@ -2,7 +2,6 @@ using Dapper;
 using SqlServer.LocalDb;
 using System.Data;
 using System.Reflection;
-using Zinger.Service;
 using Zinger.Service.Models;
 using Zinger.Service.QueryProviders;
 
@@ -31,8 +30,8 @@ public class SqlServer
 
         Assert.IsTrue(result.DataSet.Tables.Count == 2);
         Assert.IsTrue(result.ResultClasses.Count == 2);
-        Assert.IsTrue(result.ResultClasses[0].Equals(GetContent("Testing.Resources.TableResult.txt")));
-        Assert.IsTrue(result.ResultClasses[1].Equals(GetContent("Testing.Resources.ColumnResult.txt")));
+        Assert.IsTrue(result.ResultClasses[0].Equals(GetContent("Testing.Resources.SqlServer.TableResult.txt")));
+        Assert.IsTrue(result.ResultClasses[1].Equals(GetContent("Testing.Resources.SqlServer.ColumnResult.txt")));
     }
 
     [TestMethod]
@@ -48,7 +47,7 @@ public class SqlServer
 
         Assert.IsTrue(result.DataSet.Tables[0].Rows.Count == 1);
         Assert.IsTrue(result.DataSet.Tables[0].AsEnumerable().All(row => (row.Field<string>("name") ?? string.Empty).Contains("e")));
-	    Assert.IsTrue(result.ResultClasses[0].Equals(GetContent("Testing.Resources.Result1.txt")));
+	    Assert.IsTrue(result.ResultClasses[0].Equals(GetContent("Testing.Resources.SqlServer.Result1.txt")));
     }
 
     [TestMethod]
@@ -58,9 +57,8 @@ public class SqlServer
 
 	    await cn.ExecuteAsync(
 		    @"DROP TYPE IF EXISTS [dbo].[IdList];
-
-			    CREATE TYPE [dbo].[IdList] AS TABLE (
-				    [Id] int NOT NULL PRIMARY KEY
-			    )");
+			CREATE TYPE [dbo].[IdList] AS TABLE (
+				[Id] int NOT NULL PRIMARY KEY
+			)");
     }
 }

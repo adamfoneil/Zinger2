@@ -15,9 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ColumnResult.txt" />
-    <EmbeddedResource Include="Resources\Result1.txt" />
-    <EmbeddedResource Include="Resources\TableResult.txt" />
+    <EmbeddedResource Include="Resources\SqlServer\ColumnResult.txt" />
+    <EmbeddedResource Include="Resources\SqlServer\Result1.txt" />
+    <EmbeddedResource Include="Resources\SqlServer\TableResult.txt" />
   </ItemGroup>
 
   <ItemGroup>
