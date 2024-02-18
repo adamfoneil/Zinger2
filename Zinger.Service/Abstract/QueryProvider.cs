@@ -51,9 +51,9 @@ namespace Zinger.Service.Abstract
             foreach (var p in query.Parameters)
             {
                 var param = cmd.CreateParameter();
-                param.ParameterName = p.Name;               
-                param.Value = p.Value ?? DBNull.Value;
-                SetParamProperties(param, p);
+                param.ParameterName = p.Name;
+                param.DbType = p.Type;
+                param.Value = p.Value ?? DBNull.Value;                
                 cmd.Parameters.Add(param);
             }
 
@@ -68,7 +68,7 @@ namespace Zinger.Service.Abstract
             using var reader = cmd.ExecuteReader(CommandBehavior.SchemaOnly);
             do
             {
-                var resultClassName = GetResultClassName(nameIndex);
+                var resultClassName = query.ResultClassNames.Count > nameIndex ? query.ResultClassNames[nameIndex] : $"Result{nameIndex + 1}";
                 var table = reader.GetSchemaTable();
                 if (table is not null) resultClasses.Add(CSharpClassBuilder.FromSchemaTable(resultClassName, table));
                 nameIndex++;
@@ -80,18 +80,6 @@ namespace Zinger.Service.Abstract
                 DataSet = dataSet,
                 ResultClasses = resultClasses
             };
-
-            string GetResultClassName(int nameIndex)
-            {
-                try
-                {
-                    return query.ResultClassNames[nameIndex];
-                }
-                catch
-                {
-                    return $"Result{(nameIndex + 1)}";
-                }
-            }
         }
 
         public virtual object ConvertParamValue(object @object, DbType dbType) => @object;
