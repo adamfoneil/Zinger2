@@ -1,0 +1,79 @@
+public class ColumnResult
+{
+	[Column("object_id")]
+	public int ObjectId { get; set; }
+	[MaxLength(128)]
+	public string Name { get; set; }
+	[Column("column_id")]
+	public int ColumnId { get; set; }
+	[Column("system_type_id")]
+	public byte SystemTypeId { get; set; }
+	[Column("user_type_id")]
+	public int UserTypeId { get; set; }
+	[Column("max_length")]
+	public short MaxLength { get; set; }
+	public byte precision { get; set; }
+	public byte scale { get; set; }
+	[Column("collation_name")]
+	[MaxLength(128)]
+	public string CollationName { get; set; }
+	[Column("is_nullable")]
+	public bool? IsNullable { get; set; }
+	[Column("is_ansi_padded")]
+	public bool IsAnsiPadded { get; set; }
+	[Column("is_rowguidcol")]
+	public bool IsRowguidcol { get; set; }
+	[Column("is_identity")]
+	public bool IsIdentity { get; set; }
+	[Column("is_computed")]
+	public bool IsComputed { get; set; }
+	[Column("is_filestream")]
+	public bool IsFilestream { get; set; }
+	[Column("is_replicated")]
+	public bool? IsReplicated { get; set; }
+	[Column("is_non_sql_subscribed")]
+	public bool? IsNonSqlSubscribed { get; set; }
+	[Column("is_merge_published")]
+	public bool? IsMergePublished { get; set; }
+	[Column("is_dts_replicated")]
+	public bool? IsDtsReplicated { get; set; }
+	[Column("is_xml_document")]
+	public bool IsXmlDocument { get; set; }
+	[Column("xml_collection_id")]
+	public int XmlCollectionId { get; set; }
+	[Column("default_object_id")]
+	public int DefaultObjectId { get; set; }
+	[Column("rule_object_id")]
+	public int RuleObjectId { get; set; }
+	[Column("is_sparse")]
+	public bool? IsSparse { get; set; }
+	[Column("is_column_set")]
+	public bool? IsColumnSet { get; set; }
+	[Column("generated_always_type")]
+	public byte? GeneratedAlwaysType { get; set; }
+	[Column("generated_always_type_desc")]
+	[MaxLength(60)]
+	public string GeneratedAlwaysTypeDesc { get; set; }
+	[Column("encryption_type")]
+	public int? EncryptionType { get; set; }
+	[Column("encryption_type_desc")]
+	[MaxLength(64)]
+	public string EncryptionTypeDesc { get; set; }
+	[Column("encryption_algorithm_name")]
+	[MaxLength(128)]
+	public string EncryptionAlgorithmName { get; set; }
+	[Column("column_encryption_key_id")]
+	public int? ColumnEncryptionKeyId { get; set; }
+	[Column("column_encryption_key_database_name")]
+	[MaxLength(128)]
+	public string ColumnEncryptionKeyDatabaseName { get; set; }
+	[Column("is_hidden")]
+	public bool? IsHidden { get; set; }
+	[Column("is_masked")]
+	public bool IsMasked { get; set; }
+	[Column("graph_type")]
+	public int? GraphType { get; set; }
+	[Column("graph_type_desc")]
+	[MaxLength(60)]
+	public string GraphTypeDesc { get; set; }
+}

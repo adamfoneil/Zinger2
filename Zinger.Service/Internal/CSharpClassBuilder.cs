@@ -40,10 +40,10 @@ namespace Zinger.Service.Internal
         {
             prettyName = propertyName;
 
-            if (propertyName.Contains("_") || propertyName.ToUpper().Equals(propertyName))
+            if (propertyName.Contains('_') || propertyName.ToUpper().Equals(propertyName) || propertyName.ToLower().EndsWith(propertyName))
             {
                 string[] parts = propertyName.Split('_');
-                prettyName = string.Join("", parts.Select(s => TitleCase(s)));
+                prettyName = string.Join("", parts.Select(TitleCase));
                 return true;
             }
 
