@@ -1,5 +1,6 @@
 ﻿using Zinger.Service;
 using Zinger.Service.Models;
+using static System.Environment;
 
 namespace Testing;
 
@@ -31,12 +32,11 @@ public class Connections
 			}
 		};
 
-		var store = new LocalConnectionStore();
-		foreach (var cn in  connections) await store.SaveAsync(cn);
+		var store = new LocalConnectionStore(SpecialFolder.LocalApplicationData, "TestZinger");
+		foreach (var cn in connections) await store.SaveAsync(cn);
 		
 		var result = (await store.GetAllAsync().ToArrayAsync()).OrderBy(row => row.Name);
 
-		// not working because I have some other live connections on my local machine
 		Assert.IsTrue(result.SequenceEqual(connections.OrderBy(row => row.Name)));
 	}
 }

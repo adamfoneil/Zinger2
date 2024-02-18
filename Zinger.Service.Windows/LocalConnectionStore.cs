@@ -15,6 +15,10 @@ public class LocalConnectionStore(string basePath) : IConnectionStore
 
     private const string Ext = ".cn";
 
+    public LocalConnectionStore(SpecialFolder folder, string folderName) : this(Path.Combine(GetFolderPath(folder), folderName))
+    {
+    }
+
 	public LocalConnectionStore() : this(DefaultBasePath)
     {
     }
@@ -28,6 +32,8 @@ public class LocalConnectionStore(string basePath) : IConnectionStore
         var json = JsonSerializer.Serialize(connection);
         var encrypted = DataProtection.Encrypt(json);
         var outputFile = GetFilename(connection.Name);
+        var folder = Path.GetDirectoryName(outputFile) ?? throw new Exception("couldn't get folder");
+        if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
         await File.WriteAllTextAsync(outputFile, encrypted);
 	}
 
