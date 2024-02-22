@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.IO;
 using System.Text;
 
 namespace Zinger.Service.Models;
@@ -29,7 +28,11 @@ public class Query
 		};
 	}
 
-	public static Query FromFile(string path) => FromStream(File.OpenRead(path));
+	public static Query FromFile(string path)
+	{
+		using var stream = File.OpenRead(path);
+		return FromStream(stream);
+	}
     
 	private static List<Parameter> ParseParameters(string paramText)
 	{
