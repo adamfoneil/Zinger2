@@ -1,5 +1,7 @@
 ﻿
 using CommandLine;
+using System.Data;
+using System.Text;
 using Zinger.Service;
 using Zinger.Service.Abstract;
 using Zinger.Service.Interfaces;
@@ -96,17 +98,19 @@ internal class Program
 
 		if (queryProvider.Type != connection.Type) throw new Exception($"Can't use {queryProvider.Type} with {connection.Type}");
 
-		var query = BuildQuery(options);
+		var (parameters, sql) = ReadSqlFile(options.InputFilePath);
+
+		Query query = new() 
+		{ 
+			Sql = sql, 
+			Parameters = parameters 
+		};
+
 		var result = await queryProvider.ExecuteAsync(query);
 
 		foreach (var csharpClass in result.ResultClasses)
 		{
 
 		}
-	}
-
-	private static Query BuildQuery(Options options)
-	{
-		throw new NotImplementedException();
-	}
+	}	
 }

@@ -28,7 +28,7 @@ internal class Options
 	public string? ConnectionName { get; set; } = default!;
 
 	[Option]
-	public string InputFile { get; set; } = ".\\sql.qry";
+	public string InputFile { get; set; } = ".\\query.sql";
 
 	public string InputFilePath => Path.GetFullPath(InputFile);
 

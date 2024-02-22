@@ -11,7 +11,12 @@
   <ItemGroup>
     <None Remove="Resources\ColumnResult.txt" />
     <None Remove="Resources\Result1.txt" />
+    <None Remove="Resources\SampleQuery.sql" />
     <None Remove="Resources\TableResult.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\SampleQuery.sql" />
   </ItemGroup>
 
   <ItemGroup>
