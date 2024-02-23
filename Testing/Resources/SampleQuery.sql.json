@@ -1,0 +1,10 @@
+{
+	"Sql": "SELECT TOP (20) * FROM [Client] WHERE [Id]=@clientId",
+	"Parameters": [
+		{
+			"Name": "@clientId",
+			"Type": "DbType.Int",
+			"Value": "232"
+		}
+	]
+}
