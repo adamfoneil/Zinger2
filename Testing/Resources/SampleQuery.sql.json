@@ -3,7 +3,7 @@
 	"Parameters": [
 		{
 			"Name": "@clientId",
-			"Type": "DbType.Int",
+			"Type": "Int32",
 			"Value": "232"
 		}
 	]

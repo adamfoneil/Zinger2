@@ -19,7 +19,7 @@ public class Queries
 		var outputJson = new StreamReader(output).ReadToEnd();
 		var queryExpected = JsonSerializer.Deserialize<Query>(outputJson) ?? throw new Exception("Query not deserialized");
 
-		Assert.AreEqual(queryActual.Sql, queryExpected.Sql);
+		Assert.AreEqual(queryActual.Sql!.Trim(), queryExpected.Sql!.Trim());
 
 	}
 }

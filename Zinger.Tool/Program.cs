@@ -112,5 +112,10 @@ internal class Program
 		{
 
 		}
-	}	
+	}
+
+    private static (List<Query.Parameter> parameters, string sql) ReadSqlFile(string inputFilePath)
+    {
+        throw new NotImplementedException();
+    }
 }

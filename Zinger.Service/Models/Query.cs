@@ -14,7 +14,7 @@ public class Query
 	public class Parameter
 	{
 		public string? Name { get; set; }
-		public DbType Type { get; set; }
+		public string? Type { get; set; }
 		public object? Value { get; set; }
 	}
 
@@ -48,13 +48,29 @@ public class Query
 		static Parameter ParseParam(string line, int index)
 		{
 			var nameMatch = Regex.Match(line, @"@([a-zA-Z][a-zA-Z0-9_]*)");
-			var name = (nameMatch.Success) ? nameMatch.Value : $"param{index}";
+			var paramName = (nameMatch.Success) ? nameMatch.Value : $"param{index}";
 
-			var types = Enum.GetNames<DbType>();
-			var type = (DbType)Enum.Parse(typeof(DbType), types.FirstOrDefault(line.Contains) ?? "String");
+            var typeAliases = new Dictionary<string, string>()
+            {
+                ["int"] = "Int32"
+            };
+			foreach (var alias in typeAliases)
+			{
+				line = line.Replace(alias.Key + " ", alias.Value + " ");
+			}
 
-			var value = line.Substring(line.IndexOf('=')).Trim();
-			return new() { Name = name, Type = type, Value = value };
+            var types = Enum.GetNames<DbType>();
+			
+			var typeName = types
+				.FirstOrDefault(type => line.Contains(type + " ")) ??
+				throw new Exception("Parameter type not recognized");
+			
+			return new() 
+			{ 
+				Name = paramName, 
+				Type = typeName, 
+				Value = line[(line.IndexOf('=') + 1)..].Trim()
+			};
 		}
 	}
 

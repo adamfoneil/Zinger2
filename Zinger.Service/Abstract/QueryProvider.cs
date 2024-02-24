@@ -17,14 +17,7 @@ namespace Zinger.Service.Abstract
         /// </summary>
         public abstract Dictionary<int, string> ParameterTypes { get; }
         protected abstract IDbDataAdapter GetAdapter(IDbCommand command);
-        
-        protected virtual void SetParamProperties(IDbDataParameter dbParam, Query.Parameter queryParam)
-        {
-            // by default, the param type is an int cast of the param type,
-            // but this allows SQL Server to behave a little differently
-            dbParam.DbType = queryParam.Type;
-        }
-
+                
         public (bool result, string? message) TestConnection()
         {
             try
@@ -50,10 +43,11 @@ namespace Zinger.Service.Abstract
 
             foreach (var p in query.Parameters)
             {
+                var type = Enum.Parse<DbType>(p.Type ?? throw new Exception("Parameter type is required"));
                 var param = cmd.CreateParameter();
                 param.ParameterName = p.Name;
-                param.DbType = p.Type;
-                param.Value = p.Value ?? DBNull.Value;                
+                param.DbType = type;
+                param.Value = ConvertParamValue(p.Value, type) ?? DBNull.Value;                
                 cmd.Parameters.Add(param);
             }
 
@@ -82,7 +76,7 @@ namespace Zinger.Service.Abstract
             };
         }
 
-        public virtual object ConvertParamValue(object @object, DbType dbType) => @object;
+        public virtual object? ConvertParamValue(object? @object, DbType dbType) => @object;
 
         public class ExecuteResult
         {

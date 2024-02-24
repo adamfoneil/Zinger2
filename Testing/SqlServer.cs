@@ -42,7 +42,7 @@ public class SqlServer
         {
             CommandType = CommandType.Text,
             Sql = "SELECT * FROM [sys].[tables] WHERE [name] LIKE CONCAT('%', @name, '%')",
-            Parameters = [ new() { Name = "name", Type = DbType.String, Value = "de"} ]
+            Parameters = [ new() { Name = "name", Type = "String", Value = "de"} ]
         });
 
         Assert.IsTrue(result.DataSet.Tables[0].Rows.Count == 1);

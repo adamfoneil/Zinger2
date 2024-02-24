@@ -17,13 +17,5 @@ public class SqlServerQueryProvider(string connectionString) : QueryProvider
 
     protected override IDbCommand GetCommand(IDbConnection connection, Query query) => new SqlCommand(query.Sql, connection as SqlConnection);
 
-    protected override IDbConnection GetConnection() => new SqlConnection(ConnectionString);
-
-    protected override void SetParamProperties(IDbDataParameter dbParam, Query.Parameter queryParam)
-    {
-        if (dbParam is SqlParameter sqlParam)
-        {
-            sqlParam.SqlDbType = (SqlDbType)queryParam.Type;
-        }
-    }
+    protected override IDbConnection GetConnection() => new SqlConnection(ConnectionString);    
 }
