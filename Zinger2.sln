@@ -5,21 +5,13 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing", "Testing\Testing.csproj", "{DDBDCB83-706B-4ECC-8956-A30F0A379F5D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger2.BlazorWpf", "Zinger2.BlazorWpf\Zinger2.BlazorWpf.csproj", "{F4F130B0-D00F-4443-B4DD-8F36002B1E92}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger.Service", "Zinger.Service\Zinger.Service.csproj", "{4B6E2C15-207C-474B-AE09-7B7C39D68432}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger.Wpf", "Zinger.Wpf\Zinger.Wpf.csproj", "{78BC8BEC-55B7-4476-8621-27A9472BBE07}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger.WinForms", "Zinger.WinForms\Zinger.WinForms.csproj", "{57921966-7FAB-47C5-ACD4-EA8C711D9F15}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger.Tool", "Zinger.Tool\Zinger.Tool.csproj", "{1B3CF53D-F5E5-44DE-85BF-78137D78451F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger.Service.Windows", "Zinger.Service.Windows\Zinger.Service.Windows.csproj", "{C732558D-7207-4523-82A1-40C9DFE8E955}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger.OfflineServerApp", "Zinger.OfflineServerApp\Zinger.OfflineServerApp.csproj", "{7ACDE33F-08A2-4A1B-8956-EE4616A56A31}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zinger.Blazor", "Zinger.Blazor\Zinger.Blazor.csproj", "{36D6BD18-302D-404C-A564-75EC77E59E64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zinger.Blazor", "Zinger.Blazor\Zinger.Blazor.csproj", "{36D6BD18-302D-404C-A564-75EC77E59E64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,22 +23,10 @@ Global
 		{DDBDCB83-706B-4ECC-8956-A30F0A379F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDBDCB83-706B-4ECC-8956-A30F0A379F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDBDCB83-706B-4ECC-8956-A30F0A379F5D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4F130B0-D00F-4443-B4DD-8F36002B1E92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4F130B0-D00F-4443-B4DD-8F36002B1E92}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4F130B0-D00F-4443-B4DD-8F36002B1E92}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4F130B0-D00F-4443-B4DD-8F36002B1E92}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4B6E2C15-207C-474B-AE09-7B7C39D68432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4B6E2C15-207C-474B-AE09-7B7C39D68432}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B6E2C15-207C-474B-AE09-7B7C39D68432}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B6E2C15-207C-474B-AE09-7B7C39D68432}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78BC8BEC-55B7-4476-8621-27A9472BBE07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78BC8BEC-55B7-4476-8621-27A9472BBE07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78BC8BEC-55B7-4476-8621-27A9472BBE07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78BC8BEC-55B7-4476-8621-27A9472BBE07}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57921966-7FAB-47C5-ACD4-EA8C711D9F15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57921966-7FAB-47C5-ACD4-EA8C711D9F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57921966-7FAB-47C5-ACD4-EA8C711D9F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57921966-7FAB-47C5-ACD4-EA8C711D9F15}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1B3CF53D-F5E5-44DE-85BF-78137D78451F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1B3CF53D-F5E5-44DE-85BF-78137D78451F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B3CF53D-F5E5-44DE-85BF-78137D78451F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,10 +35,6 @@ Global
 		{C732558D-7207-4523-82A1-40C9DFE8E955}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C732558D-7207-4523-82A1-40C9DFE8E955}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C732558D-7207-4523-82A1-40C9DFE8E955}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7ACDE33F-08A2-4A1B-8956-EE4616A56A31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7ACDE33F-08A2-4A1B-8956-EE4616A56A31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7ACDE33F-08A2-4A1B-8956-EE4616A56A31}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7ACDE33F-08A2-4A1B-8956-EE4616A56A31}.Release|Any CPU.Build.0 = Release|Any CPU
 		{36D6BD18-302D-404C-A564-75EC77E59E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{36D6BD18-302D-404C-A564-75EC77E59E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36D6BD18-302D-404C-A564-75EC77E59E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
