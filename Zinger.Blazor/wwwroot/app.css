@@ -49,3 +49,16 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.monaco-editor-container { /* for all editor instances */
+    height: 100%;
+    width: 100%;
+    box-sizing:border-box;
+    margin:0px
+}

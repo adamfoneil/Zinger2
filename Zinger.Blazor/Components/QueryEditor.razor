@@ -1,0 +1,17 @@
+﻿<div id="query-editor-container">
+	<div id="query-editor-sql">
+		<StandaloneCodeEditor ConstructionOptions="(editor) => Options()" />
+	</div>
+	<div id="query-editor-results" class="center">
+		<div>results</div>
+	</div>
+</div>
+
+@code {
+	private StandaloneEditorConstructionOptions Options() => new()
+	{
+		AutomaticLayout = true,
+		Language = "sql",
+		Value = "SELECT * FROM [whatever];"
+	};
+}

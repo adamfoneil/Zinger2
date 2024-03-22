@@ -1,13 +1,13 @@
 ﻿#grid-ui {
 	display: grid;
 	grid-template-columns: auto 300px; /* Adjust the sidebar width as needed */
-	grid-template-rows: auto 1fr; /* Adjust the toolbar height as needed */
-	height: 100vh; /* Adjust if you want a different height */
-	gap: 5px; /* Space between grid items */	
+	grid-template-rows: auto 1fr; 
+	height: 100vh; 
+	gap: 5px;
 }
 
 #toolbar {
-	grid-column: 1 / -1; /* Toolbar spans from the first to the last column */
+	grid-column: 1 / -1;
 	grid-row: 1;
 	border: 1px solid silver
 }
@@ -20,12 +20,6 @@
 
 #sidebar {
 	grid-column: 2;
-	grid-row: 2; /* Sidebar spans from row 1 to 2 */
+	grid-row: 2;
 	border: 1px solid silver
-}
-
-.center {
-	display:flex;
-	align-items:center;
-	justify-content:center
 }
