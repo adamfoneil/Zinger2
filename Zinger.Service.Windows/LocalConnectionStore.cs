@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Zinger.Service.Interfaces;
 using Zinger.Service.Models;
-using Zinger.Service.Windows.Internal;
+using Zinger.Service.Windows;
 using static System.Environment;
 
 namespace Zinger.Service;
