@@ -39,11 +39,11 @@ public partial class ConnectionsWindow : Window
         foreach (var item in list) SavedConnections.Add(item);            
     }
 
-	private async Task TestConnections(object sender, RoutedEventArgs e)
+	private async void TestConnections(object sender, RoutedEventArgs e)
 	{
-        await foreach (var item in _connectionStore.GetAllAsync())
-        {
-            var (result, message) = item.Test();
-        }        
+		await foreach (var item in _connectionStore.GetAllAsync())
+		{
+			var (result, message) = item.Test();
+		}
 	}
 }
