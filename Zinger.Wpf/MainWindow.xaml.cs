@@ -13,7 +13,8 @@ public partial class MainWindow : Window
 
     public MainWindow(MainWindowViewModel viewModel, ConnectionsWindow connectionsWin)
     {
-        _viewModel = viewModel;            
+        _viewModel = viewModel;
+        DataContext = viewModel;
         _connectionsWin = connectionsWin;
 
         InitializeComponent();
@@ -27,5 +28,15 @@ public partial class MainWindow : Window
 	private void MnuFileExit(object sender, RoutedEventArgs e)
 	{
 		Application.Current.Shutdown();
+	}
+
+	private void Window_Closed(object sender, System.EventArgs e)
+	{
+        Application.Current.Shutdown();
+	}
+
+	private async void Window_Loaded(object sender, RoutedEventArgs e)
+	{
+        await _viewModel.InitializeAsync();
 	}
 }

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-using Zinger.Service;
 using Zinger.Service.Extensions;
+using Zinger.Service.Interfaces;
 using Zinger.Service.Models;
 using Zinger.Service.Static;
 
@@ -15,9 +14,9 @@ namespace Zinger;
 /// </summary>
 public partial class ConnectionsWindow : Window
 {
-    private readonly LocalConnectionStore _connectionStore;
+    private readonly IConnectionStore _connectionStore;
 
-    public ConnectionsWindow(LocalConnectionStore connectionStore)
+    public ConnectionsWindow(IConnectionStore connectionStore)
     {
         DataContext = this;
 

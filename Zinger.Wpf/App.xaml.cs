@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using Zinger.Service;
+using Zinger.Service.Interfaces;
 using Zinger.ViewModels;
 
 namespace Zinger;
@@ -27,7 +28,7 @@ public partial class App : Application
 
     private static void ConfigureServices(ServiceCollection services)
     {
-        services.AddSingleton<LocalConnectionStore>();
+        services.AddSingleton<IConnectionStore, LocalConnectionStore>();
         services.AddSingleton<MainWindow>();
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<ConnectionsWindow>();

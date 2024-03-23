@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:local="clr-namespace:Zinger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Closed="Window_Closed" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -22,5 +23,22 @@
 				<MenuItem Header="Exit" Click="MnuFileExit"/>
 			</MenuItem>
 		</Menu>
+
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<ToolBar Grid.Row="0" Margin="2,2,2,2">
+				<ComboBox ItemsSource="{Binding Connections}" DisplayMemberPath="{Binding Name}" Width="220px" />
+			</ToolBar>
+
+			<avalonEdit:TextEditor Grid.Row="1" FontFamily="Consolas"  />
+
+			<GridSplitter Grid.Row="2" Height="4px" HorizontalAlignment="Stretch"/>
+		</Grid>
 	</Grid>
 </Window>
