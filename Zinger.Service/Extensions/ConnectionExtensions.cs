@@ -6,16 +6,22 @@ namespace Zinger.Service.Extensions;
 
 public static class ConnectionExtensions
 {
-	public static (bool Result, string? Message) TestConnection(this Connection connection)
+	public static QueryProvider GetQueryProvider(this Connection connection)
 	{
-		QueryProvider queryProvider = connection.Type switch
+		var connectionString = connection.ConnectionString ?? throw new ArgumentException("Connection string is required");
+
+		return connection.Type switch
 		{
-			DatabaseType.SqlServer => new SqlServerQueryProvider(connection.ConnectionString!),
-			DatabaseType.MySql => new MySqlQueryProvider(connection.ConnectionString!),
-			DatabaseType.PostgreSql => new PostgreSqlQueryProvider(connection.ConnectionString!),
+			DatabaseType.SqlServer => new SqlServerQueryProvider(connectionString),
+			DatabaseType.MySql => new MySqlQueryProvider(connectionString),
+			DatabaseType.PostgreSql => new PostgreSqlQueryProvider(connectionString),
 			_ => throw new NotSupportedException()
 		};
+	}	
 
+	public static (bool Result, string? Message) Test(this Connection connection)
+	{
+		QueryProvider queryProvider = GetQueryProvider(connection);
 		return queryProvider.TestConnection();
 	}
 }

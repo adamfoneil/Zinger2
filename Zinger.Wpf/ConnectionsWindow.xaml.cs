@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using Zinger.Service;
 using Zinger.Service.Extensions;
 using Zinger.Service.Models;
@@ -44,7 +43,7 @@ public partial class ConnectionsWindow : Window
 	{
         await foreach (var item in _connectionStore.GetAllAsync())
         {
-            var (result, message) = item.TestConnection();
+            var (result, message) = item.Test();
         }        
 	}
 }

@@ -54,7 +54,7 @@ internal class Program
 			Console.WriteLine(connectionGrp.Key);
 			foreach (var connection in connectionGrp)
 			{
-				var (success, message) = connection.TestConnection();
+				var (success, message) = connection.Test();
                 if (success)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
