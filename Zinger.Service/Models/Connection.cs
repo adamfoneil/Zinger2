@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Zinger.Service.Models;
+﻿namespace Zinger.Service.Models;
 
 public enum DatabaseType
 {
@@ -16,16 +14,6 @@ public class Connection
     public string Name { get; set; } = default!;
     public DatabaseType Type { get; set; }
     public string? ConnectionString { get; set; }
-
-    /// <summary>
-    /// this is so dropdown binding works
-    /// </summary>
-    [JsonIgnore]
-    public int BindType
-    {
-        get => (int)Type;
-        set => Type = (DatabaseType)value;
-    }
 
     public override bool Equals(object? obj)
     {

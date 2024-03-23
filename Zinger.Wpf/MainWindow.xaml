@@ -12,16 +12,15 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0">
-            <MenuItem Header="File">
-                <MenuItem Header="New"/>
-                <MenuItem Header="Open..."/>
-                <Separator/>
-                <MenuItem Header="Connections..." Click="MnuFileConnections"/>
-                <Separator/>
-                <MenuItem Header="Exit"/>
-            </MenuItem>
-        </Menu>
-        
-    </Grid>
+		<Menu Grid.Row="0">
+			<MenuItem Header="File">
+				<MenuItem Header="New"/>
+				<MenuItem Header="Open..."/>
+				<Separator/>
+				<MenuItem Header="Connections..." Click="MnuFileConnections"/>
+				<Separator/>
+				<MenuItem Header="Exit" Click="MnuFileExit"/>
+			</MenuItem>
+		</Menu>
+	</Grid>
 </Window>

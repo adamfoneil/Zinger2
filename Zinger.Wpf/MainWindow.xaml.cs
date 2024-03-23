@@ -16,11 +16,16 @@ public partial class MainWindow : Window
         _viewModel = viewModel;            
         _connectionsWin = connectionsWin;
 
-        //InitializeComponent();
+        InitializeComponent();
     }
 
     private void MnuFileConnections(object sender, RoutedEventArgs e)
     {
         _connectionsWin.Show();
-    }
+    }	
+
+	private void MnuFileExit(object sender, RoutedEventArgs e)
+	{
+		Application.Current.Shutdown();
+	}
 }
