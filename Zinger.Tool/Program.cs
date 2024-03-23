@@ -4,6 +4,7 @@ using System.Data;
 using System.Text;
 using Zinger.Service;
 using Zinger.Service.Abstract;
+using Zinger.Service.Extensions;
 using Zinger.Service.Interfaces;
 using Zinger.Service.Models;
 using Zinger.Service.QueryProviders;
@@ -53,15 +54,7 @@ internal class Program
 			Console.WriteLine(connectionGrp.Key);
 			foreach (var connection in connectionGrp)
 			{
-                QueryProvider queryProvider = connection.Type switch
-                {
-                    DatabaseType.SqlServer => new SqlServerQueryProvider(connection.ConnectionString!),
-                    DatabaseType.MySql => new MySqlQueryProvider(connection.ConnectionString!),
-                    DatabaseType.PostgreSql => new PostgreSqlQueryProvider(connection.ConnectionString!),
-                    _ => throw new NotSupportedException()
-                };
-
-                var (success, message) = queryProvider.TestConnection();
+				var (success, message) = connection.TestConnection();
                 if (success)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -72,8 +65,7 @@ internal class Program
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"- {connection.Name} failed: {message}");
                 }
-            }
-			
+            }			
 		}
 
 		Console.ForegroundColor = ConsoleColor.Gray;

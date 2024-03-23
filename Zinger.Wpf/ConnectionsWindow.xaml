@@ -1,31 +1,35 @@
 ﻿<Window x:Class="Zinger.ConnectionsWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Zinger"
-        mc:Ignorable="d"
-        Title="Connections" Height="450" Width="800" Loaded="Window_Loaded">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:Zinger"
+		mc:Ignorable="d"
+		Title="Connections" Height="450" Width="800" Loaded="Window_Loaded">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
 
-        <DataGrid 
-            Grid.Row="1"
-            AutoGenerateColumns="False"
-            ItemsSource="{Binding SavedConnections, Mode=TwoWay}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Connection Name" Binding="{Binding Name}" MinWidth="120"/>
-                <DataGridTextColumn Header="Connection String" Binding="{Binding ConnectionString}" Width="*"/>
-                <DataGridComboBoxColumn Header="Type"                                          
-                                        SelectedValueBinding="{Binding Type}"
-                                        MinWidth="120"									
-                                        DisplayMemberPath="Value" SelectedValuePath="Key" 
+		<ToolBar Grid.Row="0">
+			<Button Content="Test All" Click="TestConnections" />
+		</ToolBar>
+		
+		<DataGrid 
+			Grid.Row="1"
+			AutoGenerateColumns="False"
+			ItemsSource="{Binding SavedConnections, Mode=TwoWay}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Connection Name" Binding="{Binding Name}" MinWidth="120"/>
+				<DataGridTextColumn Header="Connection String" Binding="{Binding ConnectionString}" Width="*"/>
+				<DataGridComboBoxColumn Header="Type"                                          
+										SelectedValueBinding="{Binding Type}"
+										MinWidth="120"									
+										DisplayMemberPath="Value" SelectedValuePath="Key" 
 										x:Name="ConnectionTypeDropdown"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
 </Window>

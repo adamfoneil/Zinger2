@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using Zinger.Service;
+using Zinger.Service.Extensions;
 using Zinger.Service.Models;
 using Zinger.Service.Static;
 
@@ -37,4 +39,12 @@ public partial class ConnectionsWindow : Window
         var list = await _connectionStore.GetAllAsync().ToListAsync();
         foreach (var item in list) SavedConnections.Add(item);            
     }
+
+	private async Task TestConnections(object sender, RoutedEventArgs e)
+	{
+        await foreach (var item in _connectionStore.GetAllAsync())
+        {
+            var (result, message) = item.TestConnection();
+        }        
+	}
 }
