@@ -36,7 +36,7 @@
 				<ComboBox ItemsSource="{Binding Connections}" DisplayMemberPath="{Binding Name}" Width="220px" />
 			</ToolBar>
 
-			<avalonEdit:TextEditor Grid.Row="1" FontFamily="Consolas"  />
+			<avalonEdit:TextEditor Grid.Row="1" FontFamily="Consolas" SyntaxHighlighting="SQL" ShowLineNumbers="True"  />
 
 			<GridSplitter Grid.Row="2" Height="4px" HorizontalAlignment="Stretch"/>
 		</Grid>
