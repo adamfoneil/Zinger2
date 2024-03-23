@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  zinger.blazor:
+    image: ${DOCKER_REGISTRY-}zingerblazor
+    volumes:
+      - usercontent:/app/data
+    build:
+      context: .
+      dockerfile: Zinger.Blazor/Dockerfile  
+
+volumes:
+  usercontent: {}

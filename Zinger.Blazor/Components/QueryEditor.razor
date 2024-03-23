@@ -11,6 +11,7 @@
 	private StandaloneEditorConstructionOptions Options() => new()
 	{
 		AutomaticLayout = true,
+		Minimap = new EditorMinimapOptions() { Enabled = false },
 		Language = "sql",
 		Value = "SELECT * FROM [whatever];"
 	};
