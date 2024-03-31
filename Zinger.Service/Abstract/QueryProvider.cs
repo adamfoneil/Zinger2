@@ -57,14 +57,14 @@ namespace Zinger.Service.Abstract
             await Task.Run(() => adapter.Fill(dataSet));
             sw.Stop();
 
-            List<string> resultClasses = [];
+            Dictionary<string, string> resultClasses = [];
             int nameIndex = 0;
             using var reader = cmd.ExecuteReader(CommandBehavior.SchemaOnly);
             do
             {
                 var resultClassName = query.ResultClassNames.Count > nameIndex ? query.ResultClassNames[nameIndex] : $"Result{nameIndex + 1}";
                 var table = reader.GetSchemaTable();
-                if (table is not null) resultClasses.Add(CSharpClassBuilder.FromSchemaTable(resultClassName, table));
+                if (table is not null) resultClasses.Add(dataSet.Tables[nameIndex].TableName, CSharpClassBuilder.FromSchemaTable(resultClassName, table));
                 nameIndex++;
             } while (reader.NextResult());
 
@@ -82,7 +82,8 @@ namespace Zinger.Service.Abstract
         {
             public TimeSpan Elapsed { get; init; }
             public DataSet DataSet { get; init; } = new();
-            public List<string> ResultClasses { get; init; } = [];
+            public Dictionary<string, string> ResultClasses { get; init; } = [];
+            public string[] IndexedResultClasses => ResultClasses.Select((kvp, i) => kvp.Value).ToArray();
         }
     }
 }

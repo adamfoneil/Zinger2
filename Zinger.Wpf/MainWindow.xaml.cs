@@ -62,8 +62,7 @@ public partial class MainWindow : Window
 			if (result.DataSet is not null)
 			{				
                 QueryResultTab.SelectedIndex = 0;
-            }
-			
+            }			
 		}
 		catch (Exception exc)
 		{

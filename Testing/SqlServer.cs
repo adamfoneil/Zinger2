@@ -30,8 +30,8 @@ public class SqlServer
 
         Assert.IsTrue(result.DataSet.Tables.Count == 2);
         Assert.IsTrue(result.ResultClasses.Count == 2);
-        Assert.IsTrue(result.ResultClasses[0].Equals(GetContent("Testing.Resources.SqlServer.TableResult.txt")));
-        Assert.IsTrue(result.ResultClasses[1].Equals(GetContent("Testing.Resources.SqlServer.ColumnResult.txt")));
+        Assert.IsTrue(result.IndexedResultClasses[0].Equals(GetContent("Testing.Resources.SqlServer.TableResult.txt")));
+        Assert.IsTrue(result.IndexedResultClasses[1].Equals(GetContent("Testing.Resources.SqlServer.ColumnResult.txt")));
     }
 
     [TestMethod]
@@ -47,7 +47,7 @@ public class SqlServer
 
         Assert.IsTrue(result.DataSet.Tables[0].Rows.Count == 1);
         Assert.IsTrue(result.DataSet.Tables[0].AsEnumerable().All(row => (row.Field<string>("name") ?? string.Empty).Contains("e")));
-	    Assert.IsTrue(result.ResultClasses[0].Equals(GetContent("Testing.Resources.SqlServer.Result1.txt")));
+	    Assert.IsTrue(result.IndexedResultClasses.Equals(GetContent("Testing.Resources.SqlServer.Result1.txt")));
     }
 
     [TestMethod]

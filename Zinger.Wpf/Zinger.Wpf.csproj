@@ -12,10 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Static\" />
-  </ItemGroup>
+	
 
   <ItemGroup>
     <ProjectReference Include="..\Zinger.Service.Windows\Zinger.Service.Windows.csproj" />
