@@ -5,7 +5,7 @@ using Zinger.Service.Models;
 
 namespace Zinger.Service.Abstract
 {
-	public abstract class QueryProvider
+    public abstract class QueryProvider
     {
         public abstract DatabaseType Type { get; }
 
@@ -17,7 +17,7 @@ namespace Zinger.Service.Abstract
         /// </summary>
         public abstract Dictionary<int, string> ParameterTypes { get; }
         protected abstract IDbDataAdapter GetAdapter(IDbCommand command);
-                
+
         public (bool result, string? message) TestConnection()
         {
             try
@@ -47,7 +47,7 @@ namespace Zinger.Service.Abstract
                 var param = cmd.CreateParameter();
                 param.ParameterName = p.Name;
                 param.DbType = type;
-                param.Value = ConvertParamValue(p.Value, type) ?? DBNull.Value;                
+                param.Value = ConvertParamValue(p.Value, type) ?? DBNull.Value;
                 cmd.Parameters.Add(param);
             }
 

@@ -19,13 +19,13 @@ public class Connection
     {
         if (obj is Connection connection)
         {
-            return GetHashCode().Equals(connection.GetHashCode());               
+            return GetHashCode().Equals(connection.GetHashCode());
         }
 
         return false;
     }
 
-	public override string ToString() => $"{Name} ({Type})";
-	
-	public override int GetHashCode() => (Name?.ToLower() + Type.ToString() + ConnectionString?.ToLower()).GetHashCode();
+    public override string ToString() => $"{Name} ({Type})";
+
+    public override int GetHashCode() => (Name?.ToLower() + Type.ToString() + ConnectionString?.ToLower()).GetHashCode();
 }

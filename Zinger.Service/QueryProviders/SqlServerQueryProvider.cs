@@ -17,5 +17,5 @@ public class SqlServerQueryProvider(string connectionString) : QueryProvider
 
     protected override IDbCommand GetCommand(IDbConnection connection, Query query) => new SqlCommand(query.Sql, connection as SqlConnection);
 
-    protected override IDbConnection GetConnection() => new SqlConnection(ConnectionString);    
+    protected override IDbConnection GetConnection() => new SqlConnection(ConnectionString);
 }

@@ -7,51 +7,51 @@ using Zinger.Service.Models;
 
 namespace Zinger.ViewModels
 {
-	public class MainWindowViewModel(IConnectionStore connectionStore) : INotifyPropertyChanged
-	{
-		public IConnectionStore ConnectionStore { get; } = connectionStore;
+    public class MainWindowViewModel(IConnectionStore connectionStore) : INotifyPropertyChanged
+    {
+        public IConnectionStore ConnectionStore { get; } = connectionStore;
 
-		private Connection? _currentConnection;
-		private string? _sql;
+        private Connection? _currentConnection;
+        private string? _sql;
 
-		public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-		public Connection? CurrentConnection 
-		{ 
-			get => _currentConnection; 
-			set
-			{
-				_currentConnection = value;
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentConnection)));
-			}
-		}
+        public Connection? CurrentConnection
+        {
+            get => _currentConnection;
+            set
+            {
+                _currentConnection = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentConnection)));
+            }
+        }
 
-		public string? Sql
-		{
-			get => _sql;
-			set
-			{
-				_sql = value;
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Sql)));
-			}
-		}
+        public string? Sql
+        {
+            get => _sql;
+            set
+            {
+                _sql = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Sql)));
+            }
+        }
 
-		private QueryProvider.ExecuteResult? _queryResult;
-		public QueryProvider.ExecuteResult? QueryResult
-		{
-			get => _queryResult;
-			set
-			{
-				_queryResult = value;
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(QueryResult)));
-			}
-		}
+        private QueryProvider.ExecuteResult? _queryResult;
+        public QueryProvider.ExecuteResult? QueryResult
+        {
+            get => _queryResult;
+            set
+            {
+                _queryResult = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(QueryResult)));
+            }
+        }
 
-		public async Task InitializeAsync()
-		{
-			await foreach (var connection in ConnectionStore.GetAllAsync()) Connections.Add(connection);
-		}
+        public async Task InitializeAsync()
+        {
+            await foreach (var connection in ConnectionStore.GetAllAsync()) Connections.Add(connection);
+        }
 
-		public ObservableCollection<Connection> Connections { get; private set; } = [];
-	}
+        public ObservableCollection<Connection> Connections { get; private set; } = [];
+    }
 }

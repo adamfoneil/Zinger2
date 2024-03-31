@@ -16,14 +16,14 @@ namespace Zinger.Service.Internal
             result.AppendLine($"public class {className}\r\n{{");
 
             foreach (var prop in properties)
-            {				
-				string useName;
-				if (IsUglyColumnName(prop.PropertyName, out useName))
-				{
-					result.AppendLine($"\t[Column(\"{prop.PropertyName}\")]");
-				}
+            {
+                string useName;
+                if (IsUglyColumnName(prop.PropertyName, out useName))
+                {
+                    result.AppendLine($"\t[Column(\"{prop.PropertyName}\")]");
+                }
 
-				if (withAttributes)
+                if (withAttributes)
                 {
                     foreach (var attr in prop.GetAttributes()) result.AppendLine($"\t{attr}");
                 }
@@ -64,7 +64,7 @@ namespace Zinger.Service.Internal
             List<ColumnInfo> results = new List<ColumnInfo>();
 
             var provider = new CSharpCodeProvider();
-            
+
             foreach (DataRow row in schemaTable.Rows)
             {
                 string columnName = row.Field<string>("ColumnName") ?? string.Empty;

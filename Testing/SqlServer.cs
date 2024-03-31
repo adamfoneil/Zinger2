@@ -23,7 +23,7 @@ public class SqlServer
         var qp = new SqlServerQueryProvider(LocalDb.GetConnectionString("master"));
         var result = await qp.ExecuteAsync(new Query()
         {
-		    ResultClassNames = ["TableResult", "ColumnResult"], 
+            ResultClassNames = ["TableResult", "ColumnResult"],
             CommandType = CommandType.Text,
             Sql = "SELECT * FROM [sys].[tables]; SELECT * FROM [sys].[columns]"
         });
@@ -42,21 +42,21 @@ public class SqlServer
         {
             CommandType = CommandType.Text,
             Sql = "SELECT * FROM [sys].[tables] WHERE [name] LIKE CONCAT('%', @name, '%')",
-            Parameters = [ new() { Name = "name", Type = "String", Value = "de"} ]
+            Parameters = [new() { Name = "name", Type = "String", Value = "de" }]
         });
 
         Assert.IsTrue(result.DataSet.Tables[0].Rows.Count == 1);
         Assert.IsTrue(result.DataSet.Tables[0].AsEnumerable().All(row => (row.Field<string>("name") ?? string.Empty).Contains("e")));
-	    Assert.IsTrue(result.IndexedResultClasses.Equals(GetContent("Testing.Resources.SqlServer.Result1.txt")));
+        Assert.IsTrue(result.IndexedResultClasses.Equals(GetContent("Testing.Resources.SqlServer.Result1.txt")));
     }
 
     [TestMethod]
     public async Task QueryWithTableParam()
     {
-	    using var cn = LocalDb.GetConnection("ZingerSample");
+        using var cn = LocalDb.GetConnection("ZingerSample");
 
-	    await cn.ExecuteAsync(
-		    @"DROP TYPE IF EXISTS [dbo].[IdList];
+        await cn.ExecuteAsync(
+            @"DROP TYPE IF EXISTS [dbo].[IdList];
 			CREATE TYPE [dbo].[IdList] AS TABLE (
 				[Id] int NOT NULL PRIMARY KEY
 			)");

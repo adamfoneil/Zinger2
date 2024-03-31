@@ -19,14 +19,14 @@ public class LocalConnectionStore(string basePath) : IConnectionStore
     {
     }
 
-	public LocalConnectionStore() : this(DefaultBasePath)
+    public LocalConnectionStore() : this(DefaultBasePath)
     {
     }
 
     private string GetFilename(string connectionName) => Path.Combine(_basePath, $"{connectionName}{Ext}");
-    
-	public async Task SaveAsync(Connection connection)
-	{
+
+    public async Task SaveAsync(Connection connection)
+    {
         ArgumentNullException.ThrowIfNull(nameof(connection));
 
         var json = JsonSerializer.Serialize(connection);
@@ -35,18 +35,18 @@ public class LocalConnectionStore(string basePath) : IConnectionStore
         var folder = Path.GetDirectoryName(outputFile) ?? throw new Exception("couldn't get folder");
         if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
         await File.WriteAllTextAsync(outputFile, encrypted);
-	}
+    }
 
-	public async Task<Connection> LoadAsync(string name)
-	{
-		var file = GetFilename(name);
+    public async Task<Connection> LoadAsync(string name)
+    {
+        var file = GetFilename(name);
 
         if (!File.Exists(file)) throw new FileNotFoundException($"File not found: {file}");
-		
+
         var content = await File.ReadAllTextAsync(file);
         var json = DataProtection.Decrypt(content);
-        return JsonSerializer.Deserialize<Connection>(json) ?? throw new Exception("Couldn't deserialize connection data");        
-	}
+        return JsonSerializer.Deserialize<Connection>(json) ?? throw new Exception("Couldn't deserialize connection data");
+    }
 
     public async IAsyncEnumerable<Connection> GetAllAsync()
     {

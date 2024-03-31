@@ -26,7 +26,7 @@ public partial class ConnectionsWindow : Window
         ConnectionTypes = EnumHelper.ToDictionary<DatabaseType>();
 
         InitializeComponent();
-        ConnectionTypeDropdown.ItemsSource = ConnectionTypes;        
+        ConnectionTypeDropdown.ItemsSource = ConnectionTypes;
     }
 
     public ObservableCollection<Connection> SavedConnections { get; set; }
@@ -35,14 +35,14 @@ public partial class ConnectionsWindow : Window
     private async void Window_Loaded(object sender, RoutedEventArgs e)
     {
         var list = await _connectionStore.GetAllAsync().ToListAsync();
-        foreach (var item in list) SavedConnections.Add(item);            
+        foreach (var item in list) SavedConnections.Add(item);
     }
 
-	private async void TestConnections(object sender, RoutedEventArgs e)
-	{
-		await foreach (var item in _connectionStore.GetAllAsync())
-		{
-			var (result, message) = item.Test();
-		}
-	}
+    private async void TestConnections(object sender, RoutedEventArgs e)
+    {
+        await foreach (var item in _connectionStore.GetAllAsync())
+        {
+            var (result, message) = item.Test();
+        }
+    }
 }

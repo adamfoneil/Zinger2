@@ -16,8 +16,8 @@ public partial class App : Application
     public App()
     {
         ServiceCollection services = new();
-	    ConfigureServices(services);
-        _serviceProvider = services.BuildServiceProvider();        
+        ConfigureServices(services);
+        _serviceProvider = services.BuildServiceProvider();
     }
 
     private void OnStartup(object sender, StartupEventArgs e)
