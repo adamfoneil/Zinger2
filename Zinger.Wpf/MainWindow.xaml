@@ -41,6 +41,19 @@
 				TextChanged="TextEditor_TextChanged"  />
 
 			<GridSplitter Grid.Row="2" Height="4px" HorizontalAlignment="Stretch"/>
+
+			<TabControl Grid.Row="3" Margin="2,2,2,2" ItemsSource="{Binding QueryResult.DataSet.Tables}" x:Name="QueryResultTab">
+				<TabControl.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding TableName}"/>
+					</DataTemplate>
+				</TabControl.ItemTemplate>
+				<TabControl.ContentTemplate>
+					<DataTemplate>
+						<DataGrid ItemsSource="{Binding DefaultView}" AutoGenerateColumns="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+					</DataTemplate>
+				</TabControl.ContentTemplate>
+			</TabControl>
 		</Grid>
 	</Grid>
 </Window>

@@ -35,7 +35,7 @@ public partial class MainWindow : Window
 		Application.Current.Shutdown();
 	}
 
-	private void Window_Closed(object sender, System.EventArgs e)
+	private void Window_Closed(object sender, EventArgs e)
 	{
 		Application.Current.Shutdown();
 	}
@@ -57,6 +57,13 @@ public partial class MainWindow : Window
 				CommandType = CommandType.Text,
 				Sql = _viewModel.Sql
 			});
+
+			_viewModel.QueryResult = result;
+			if (result.DataSet is not null)
+			{				
+                QueryResultTab.SelectedIndex = 0;
+            }
+			
 		}
 		catch (Exception exc)
 		{

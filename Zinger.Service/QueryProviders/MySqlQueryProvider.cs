@@ -17,5 +17,5 @@ public class MySqlQueryProvider(string connectionString) : QueryProvider
 
     protected override IDbCommand GetCommand(IDbConnection connection, Query query) => new MySqlCommand(query.Sql, connection as MySqlConnection);
     
-    protected override IDbConnection GetConnection() => new MySqlConnection(ConnectionString);    
+    protected override IDbConnection GetConnection() => new MySqlConnection(ConnectionString);
 }

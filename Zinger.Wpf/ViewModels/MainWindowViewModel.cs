@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Zinger.Service.Abstract;
 using Zinger.Service.Interfaces;
 using Zinger.Service.Models;
 
@@ -32,6 +33,17 @@ namespace Zinger.ViewModels
 			{
 				_sql = value;
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Sql)));
+			}
+		}
+
+		private QueryProvider.ExecuteResult? _queryResult;
+		public QueryProvider.ExecuteResult? QueryResult
+		{
+			get => _queryResult;
+			set
+			{
+				_queryResult = value;
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(QueryResult)));
 			}
 		}
 
