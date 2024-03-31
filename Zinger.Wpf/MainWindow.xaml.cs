@@ -52,7 +52,7 @@ public partial class MainWindow : Window
 			if (_viewModel.CurrentConnection is null) return;
 
 			var queryProvider = _viewModel.CurrentConnection.GetQueryProvider();
-			var data = await queryProvider.ExecuteAsync(new Query()
+			var result = await queryProvider.ExecuteAsync(new Query()
 			{
 				CommandType = CommandType.Text,
 				Sql = _viewModel.Sql
