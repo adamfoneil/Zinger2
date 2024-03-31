@@ -72,7 +72,7 @@ namespace Zinger.Service.Internal
                 ColumnInfo columnInfo = new ColumnInfo()
                 {
                     Name = columnName,
-                    CSharpType = CSharpTypeName(provider, row.Field<Type>("DataType")),
+                    CSharpType = CSharpTypeName(provider, row.Field<Type>("DataType")!),
                     IsNullable = row.Field<bool>("AllowDBNull"),
                     Index = (dupColumns.ContainsKey(columnName)) ? dupColumns[columnName] : 0
                 };
