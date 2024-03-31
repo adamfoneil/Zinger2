@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Threading;
 using Zinger.Service.Extensions;
 using Zinger.Service.Interfaces;
 using Zinger.Service.Models;
@@ -23,7 +27,7 @@ public partial class ConnectionsWindow : Window
 
         _connectionStore = connectionStore;
 
-        SavedConnections = [];
+        SavedConnections = [];        
         ConnectionTypes = EnumHelper.ToDictionary<DatabaseType>();
 
         InitializeComponent();
@@ -37,6 +41,21 @@ public partial class ConnectionsWindow : Window
     {
         var list = await _connectionStore.GetAllAsync().ToListAsync();
         foreach (var item in list) SavedConnections.Add(item);
+
+        SavedConnections.CollectionChanged += SaveChanges;
+    }
+
+    private async void SaveChanges(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        foreach (var added in e.NewItems?.OfType<Connection>() ?? [])
+        {
+            await _connectionStore.SaveAsync(added);
+        }
+
+        foreach (var removed in e.OldItems?.OfType<Connection>() ?? [])
+        {
+            await _connectionStore.DeleteAsync(removed.Name);
+        }
     }
 
     private async void TestConnections(object sender, RoutedEventArgs e)

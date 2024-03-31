@@ -21,7 +21,14 @@ public static class ConnectionExtensions
 
     public static (bool Result, string? Message) Test(this Connection connection)
     {
-        QueryProvider queryProvider = GetQueryProvider(connection);
-        return queryProvider.TestConnection();
+        try
+        {
+            QueryProvider queryProvider = GetQueryProvider(connection);
+            return queryProvider.TestConnection();
+        }
+        catch (Exception exc)
+        {
+            return (false, exc.Message);
+        }        
     }
 }

@@ -64,5 +64,12 @@ public class LocalConnectionStore(string basePath) : IConnectionStore
             .Select(fileName => Path.GetFileNameWithoutExtension(fileName))
             .ToArray();
 
+    public async Task DeleteAsync(string name)
+    {
+        var fileName = GetFilename(name);
+        if (File.Exists(fileName)) File.Delete(fileName);
+        await Task.CompletedTask;
+    }
+
     public static string DefaultBasePath => Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), "Zinger");
 }

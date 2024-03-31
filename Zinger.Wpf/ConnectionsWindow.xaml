@@ -20,7 +20,7 @@
 		<DataGrid 
 			Grid.Row="1"
 			AutoGenerateColumns="False"
-			ItemsSource="{Binding SavedConnections, Mode=TwoWay}">
+			ItemsSource="{Binding SavedConnections, Mode=TwoWay}" RowHeaderWidth="30">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Connection Name" Binding="{Binding Name}" MinWidth="120"/>
 				<DataGridTextColumn Header="Connection String" Binding="{Binding ConnectionString}" Width="*"/>
