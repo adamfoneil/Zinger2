@@ -26,7 +26,7 @@ public partial class MainWindow : Window
     }
 
     private void MnuFileConnections(object sender, RoutedEventArgs e)
-    {
+    {        
         _connectionsWin.Show();
     }
 

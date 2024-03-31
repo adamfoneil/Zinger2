@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using Zinger.Service.Extensions;
@@ -44,5 +45,11 @@ public partial class ConnectionsWindow : Window
         {
             var (result, message) = item.Test();
         }
+    }
+
+    private void Window_Closing(object sender, CancelEventArgs e)
+    {
+        e.Cancel = true;
+        Hide();
     }
 }

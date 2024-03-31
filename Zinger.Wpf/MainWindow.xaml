@@ -57,9 +57,9 @@
 					<DataTemplate>
 						<Grid>
 							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="3*"/>
+								<ColumnDefinition Width="5*"/>
 								<ColumnDefinition Width="4px"/>
-								<ColumnDefinition Width="1*"/>
+								<ColumnDefinition Width="2*"/>
 							</Grid.ColumnDefinitions>
 							<DataGrid Grid.Column="0" ItemsSource="{Binding DefaultView}" AutoGenerateColumns="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 							<GridSplitter Grid.Column="1" Width="4px" HorizontalAlignment="Stretch"/>
