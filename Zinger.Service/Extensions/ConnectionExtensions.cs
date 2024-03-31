@@ -29,6 +29,6 @@ public static class ConnectionExtensions
         catch (Exception exc)
         {
             return (false, exc.Message);
-        }        
+        }
     }
 }

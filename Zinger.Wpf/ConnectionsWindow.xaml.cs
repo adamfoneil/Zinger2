@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using Zinger.Service.Extensions;
 using Zinger.Service.Interfaces;
 using Zinger.Service.Models;
@@ -27,7 +24,7 @@ public partial class ConnectionsWindow : Window
 
         _connectionStore = connectionStore;
 
-        SavedConnections = [];        
+        SavedConnections = [];
         ConnectionTypes = EnumHelper.ToDictionary<DatabaseType>();
 
         InitializeComponent();
