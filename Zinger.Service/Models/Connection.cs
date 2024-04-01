@@ -5,8 +5,7 @@ public enum DatabaseType
     SqlServer,
     MySql,
     PostgreSql,
-    OleDb,
-    SqlLite
+    OleDb 
 }
 
 public class Connection
