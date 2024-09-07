@@ -9,15 +9,12 @@ public class ResultClassConverter : IMultiValueConverter
 {
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        var dictionary = values[0] as Dictionary<string, string>;
-        var key = values[1] as string;
+		if (values[0] is Dictionary<string, string> dictionary && values[1] is string key && dictionary.TryGetValue(key, out string? value))
+		{
+			return value;
+		}
 
-        if (dictionary != null && key != null && dictionary.TryGetValue(key, out string? value))
-        {
-            return value;
-        }
-
-        return null!;
+		return null!;
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
