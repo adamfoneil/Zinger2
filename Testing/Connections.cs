@@ -11,13 +11,7 @@ public class Connections
     public async Task TestConnectionStore()
     {
         var connections = new[]
-        {
-            new Connection()
-            {
-                Name = "this",
-                ConnectionString = "connection string alpha",
-                Type = DatabaseType.SqlLite
-            },
+        {            
             new Connection()
             {
                 Name = "that",
