@@ -19,7 +19,7 @@
 
         public string PropertyName => (Index > 0) ? $"{Name}{Index}" : Name;
 
-        public string ToColumnName() => (Name.StartsWith("@")) ? Name.Substring(1) : Name;
+        public string ToColumnName() => Name.StartsWith("@") ? Name.Substring(1) : Name;
 
         public IEnumerable<string> GetAttributes()
         {
