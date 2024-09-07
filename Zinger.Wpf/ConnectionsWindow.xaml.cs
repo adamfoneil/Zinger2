@@ -38,21 +38,6 @@ public partial class ConnectionsWindow : Window
     {
         var list = await _connectionStore.GetAllAsync().ToListAsync();
         foreach (var item in list) SavedConnections.Add(item);
-
-        SavedConnections.CollectionChanged += SaveChanges;
-    }
-
-    private async void SaveChanges(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        foreach (var added in e.NewItems?.OfType<Connection>() ?? [])
-        {
-            await _connectionStore.SaveAsync(added);
-        }
-
-        foreach (var removed in e.OldItems?.OfType<Connection>() ?? [])
-        {
-            await _connectionStore.DeleteAsync(removed.Name);
-        }
     }
 
     private async void TestConnections(object sender, RoutedEventArgs e)
@@ -68,4 +53,9 @@ public partial class ConnectionsWindow : Window
         e.Cancel = true;
         Hide();
     }
+
+	private async void SaveConnections(object sender, RoutedEventArgs e)
+	{
+        foreach (var cn in SavedConnections) await _connectionStore.SaveAsync(cn);
+	}
 }

@@ -14,7 +14,8 @@
 		</Grid.RowDefinitions>
 
 		<ToolBar Grid.Row="0">
-			<Button Content="Test All" Click="TestConnections" />
+			<Button Content="Test All" Click="TestConnections" Margin="3" />
+			<Button Content="Save" Click="SaveConnections" Margin="3" />
 		</ToolBar>
 		
 		<DataGrid 
